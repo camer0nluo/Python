@@ -26,8 +26,9 @@ class Dinic:
         for i in range(self.ptr[vertex], len(self.adj[vertex])):
             e = self.adj[vertex][i]
             if self.lvl[e[0]] == self.lvl[vertex] + 1:
-                p = self.depth_first_search(e[0], sink, min(flow, e[2] - e[3]))
-                if p:
+                if p := self.depth_first_search(
+                    e[0], sink, min(flow, e[2] - e[3])
+                ):
                     self.adj[vertex][i][3] += p
                     self.adj[e[0]][e[1]][3] -= p
                     return p
@@ -50,11 +51,8 @@ class Dinic:
                             qe += 1
                             self.lvl[e[0]] = self.lvl[v] + 1
 
-                p = self.depth_first_search(source, sink, INF)
-                while p:
+                while p := self.depth_first_search(source, sink, INF):
                     flow += p
-                    p = self.depth_first_search(source, sink, INF)
-
                 if not self.lvl[sink]:
                     break
 

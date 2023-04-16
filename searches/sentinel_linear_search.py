@@ -39,10 +39,7 @@ def sentinel_linear_search(sequence, target):
 
     sequence.pop()
 
-    if index == len(sequence):
-        return None
-
-    return index
+    return None if index == len(sequence) else index
 
 
 if __name__ == "__main__":

@@ -61,7 +61,7 @@ def match_pattern(input_string: str, pattern: str) -> bool:
     # length i of input_string matches with prefix string of length j of
     # given pattern.
     # "dp" stands for dynamic programming.
-    dp = [[0 for i in range(len_pattern)] for j in range(len_string)]
+    dp = [[0 for _ in range(len_pattern)] for _ in range(len_string)]
 
     # since string of zero length match pattern of zero length
     dp[0][0] = 1

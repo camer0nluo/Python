@@ -5,20 +5,22 @@ from collections import deque
 
 class Automaton:
     def __init__(self, keywords: list[str]):
-        self.adlist: list[dict] = list()
-        self.adlist.append(
+        self.adlist: list[dict] = [
             {"value": "", "next_states": [], "fail_state": 0, "output": []}
-        )
-
+        ]
         for keyword in keywords:
             self.add_keyword(keyword)
         self.set_fail_transitions()
 
     def find_next_state(self, current_state: int, char: str) -> int | None:
-        for state in self.adlist[current_state]["next_states"]:
-            if char == self.adlist[state]["value"]:
-                return state
-        return None
+        return next(
+            (
+                state
+                for state in self.adlist[current_state]["next_states"]
+                if char == self.adlist[state]["value"]
+            ),
+            None,
+        )
 
     def add_keyword(self, keyword: str) -> None:
         current_state = 0
@@ -70,9 +72,7 @@ class Automaton:
         >>> A.search_in("whatever, err ... , wherever")
         {'what': [0], 'hat': [1], 'ver': [5, 25], 'er': [6, 10, 22, 26]}
         """
-        result: dict = (
-            dict()
-        )  # returns a dict with keywords and list of its occurrences
+        result: dict = {}
         current_state = 0
         for i in range(len(string)):
             while (
@@ -86,7 +86,7 @@ class Automaton:
             else:
                 current_state = next_state
                 for key in self.adlist[current_state]["output"]:
-                    if not (key in result):
+                    if key not in result:
                         result[key] = []
                     result[key].append(i - len(key) + 1)
         return result

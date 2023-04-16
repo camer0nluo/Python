@@ -42,7 +42,7 @@ class CNN:
         self.rate_thre = rate_t
         self.w_conv1 = [
             np.mat(-1 * np.random.rand(self.conv1[0], self.conv1[0]) + 0.5)
-            for i in range(self.conv1[1])
+            for _ in range(self.conv1[1])
         ]
         self.wkj = np.mat(-1 * np.random.rand(self.num_bp3, self.num_bp2) + 0.5)
         self.vji = np.mat(-1 * np.random.rand(self.num_bp2, self.num_bp1) + 0.5)
@@ -71,7 +71,7 @@ class CNN:
         with open(save_path, "wb") as f:
             pickle.dump(model_dic, f)
 
-        print("Model saved： %s" % save_path)
+        print(f"Model saved： {save_path}")
 
     @classmethod
     def ReadModel(cls, model_path):
@@ -122,9 +122,9 @@ class CNN:
         Size_FeatureMap = int((size_data - size_conv) / conv_step + 1)
         for i_map in range(num_conv):
             featuremap = []
-            for i_focus in range(len(data_focus)):
+            for data_focu in data_focus:
                 net_focus = (
-                    np.sum(np.multiply(data_focus[i_focus], w_convs[i_map]))
+                    np.sum(np.multiply(data_focu, w_convs[i_map]))
                     - thre_convs[i_map]
                 )
                 featuremap.append(self.sig(net_focus))
@@ -172,15 +172,13 @@ class CNN:
             data_listed = data[i].reshape(1, shapes[0] * shapes[1])
             data_listed = data_listed.getA().tolist()[0]
             data_expanded.extend(data_listed)
-        data_expanded = np.asarray(data_expanded)
-        return data_expanded
+        return np.asarray(data_expanded)
 
     def _expand_mat(self, data_mat):
         # expanding matrix to one dimension list
         data_mat = np.asarray(data_mat)
         shapes = np.shape(data_mat)
-        data_expanded = data_mat.reshape(1, shapes[0] * shapes[1])
-        return data_expanded
+        return data_mat.reshape(1, shapes[0] * shapes[1])
 
     def _calculate_gradient_from_pool(
         self, out_map, pd_pool, num_map, size_map, size_pooling
@@ -289,7 +287,7 @@ class CNN:
                 error_count += errors
                 # print('   ----Teach      ',data_teach)
                 # print('   ----BP_output  ',bp_out3)
-            rp = rp + 1
+            rp += 1
             mse = error_count / patterns
             all_mse.append(mse)
 

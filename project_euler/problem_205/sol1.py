@@ -54,21 +54,18 @@ def solution() -> float:
         sides_number=6, dice_number=6
     )
 
-    peter_wins_count = 0
     min_peter_total = 9
     max_peter_total = 4 * 9
     min_colin_total = 6
-    for peter_total in range(min_peter_total, max_peter_total + 1):
-        peter_wins_count += peter_totals_frequencies[peter_total] * sum(
-            colin_totals_frequencies[min_colin_total:peter_total]
-        )
-
+    peter_wins_count = sum(
+        peter_totals_frequencies[peter_total]
+        * sum(colin_totals_frequencies[min_colin_total:peter_total])
+        for peter_total in range(min_peter_total, max_peter_total + 1)
+    )
     total_games_number = (4**9) * (6**6)
     peter_win_probability = peter_wins_count / total_games_number
 
-    rounded_peter_win_probability = round(peter_win_probability, ndigits=7)
-
-    return rounded_peter_win_probability
+    return round(peter_win_probability, ndigits=7)
 
 
 if __name__ == "__main__":

@@ -89,7 +89,7 @@ def sieveEr(N):
     assert isinstance(N, int) and (N > 2), "'N' must been an int and > 2"
 
     # beginList: contains all natural numbers from 2 up to N
-    beginList = [x for x in range(2, N + 1)]
+    beginList = list(range(2, N + 1))
 
     ans = []  # this list will be returns.
 
@@ -123,16 +123,7 @@ def getPrimeNumbers(N):
     # precondition
     assert isinstance(N, int) and (N > 2), "'N' must been an int and > 2"
 
-    ans = []
-
-    # iterates over all numbers between 2 up to N+1
-    # if a number is prime then appends to list 'ans'
-    for number in range(2, N + 1):
-
-        if isPrime(number):
-
-            ans.append(number)
-
+    ans = [number for number in range(2, N + 1) if isPrime(number)]
     # precondition
     assert isinstance(ans, list), "'ans' must been from type list"
 
@@ -159,12 +150,11 @@ def primeFactorization(number):
 
     quotient = number
 
-    if number == 0 or number == 1:
+    if number in [0, 1] or number not in [0, 1] and isPrime(number):
 
         ans.append(number)
 
-    # if 'number' not prime then builds the prime factorization of 'number'
-    elif not isPrime(number):
+    else:
 
         while quotient != 1:
 
@@ -173,9 +163,6 @@ def primeFactorization(number):
                 quotient /= factor
             else:
                 factor += 1
-
-    else:
-        ans.append(number)
 
     # precondition
     assert isinstance(ans, list), "'ans' must been from type list"
@@ -305,9 +292,7 @@ def goldbach(number):
 
             if primeNumbers[i] + primeNumbers[j] == number:
                 loop = False
-                ans.append(primeNumbers[i])
-                ans.append(primeNumbers[j])
-
+                ans.extend((primeNumbers[i], primeNumbers[j]))
             j += 1
 
         i += 1
@@ -406,14 +391,14 @@ def kgV(number1, number2):
                 count1 = primeFac1.count(n)
                 count2 = primeFac2.count(n)
 
-                for i in range(max(count1, count2)):
+                for _ in range(max(count1, count2)):
                     ans *= n
 
             else:
 
                 count1 = primeFac1.count(n)
 
-                for i in range(count1):
+                for _ in range(count1):
                     ans *= n
 
             done.append(n)
@@ -425,7 +410,7 @@ def kgV(number1, number2):
 
             count2 = primeFac2.count(n)
 
-            for i in range(count2):
+            for _ in range(count2):
                 ans *= n
 
             done.append(n)
@@ -510,7 +495,7 @@ def getPrimesBetween(pNumber1, pNumber2):
 
     # precondition
     assert (
-        isinstance(ans, list) and ans[0] != pNumber1 and ans[len(ans) - 1] != pNumber2
+        isinstance(ans, list) and ans[0] != pNumber1 and ans[-1] != pNumber2
     ), "'ans' must been a list without the arguments"
 
     # 'ans' contains not 'pNumber1' and 'pNumber2' !
@@ -529,15 +514,9 @@ def getDivisors(n):
     # precondition
     assert isinstance(n, int) and (n >= 1), "'n' must been int and >= 1"
 
-    ans = []  # will be returned.
-
-    for divisor in range(1, n + 1):
-
-        if n % divisor == 0:
-            ans.append(divisor)
-
+    ans = [divisor for divisor in range(1, n + 1) if n % divisor == 0]
     # precondition
-    assert ans[0] == 1 and ans[len(ans) - 1] == n, "Error in function getDivisiors(...)"
+    assert ans[0] == 1 and ans[-1] == n, "Error in function getDivisiors(...)"
 
     return ans
 
@@ -635,8 +614,7 @@ def fib(n):
     fib1 = 1
     ans = 1  # this will be return
 
-    for i in range(n - 1):
-
+    for _ in range(n - 1):
         tmp = ans
         ans += fib1
         fib1 = tmp

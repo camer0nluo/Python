@@ -195,15 +195,10 @@ def brute_force(input_string: str, alphabet: str | None = None) -> dict[int, str
     # Set default alphabet to lower and upper case english chars
     alpha = alphabet or ascii_letters
 
-    # To store data on all the combinations
-    brute_force_data = {}
-
-    # Cycle through each combination
-    for key in range(1, len(alpha) + 1):
-        # Decrypt the message and store the result in the data
-        brute_force_data[key] = decrypt(input_string, key, alpha)
-
-    return brute_force_data
+    return {
+        key: decrypt(input_string, key, alpha)
+        for key in range(1, len(alpha) + 1)
+    }
 
 
 if __name__ == "__main__":

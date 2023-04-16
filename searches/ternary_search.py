@@ -52,10 +52,7 @@ def lin_search(left: int, right: int, array: list[int], target: int) -> int:
     >>> lin_search(0, 3, [.1, .4 , -.1], -.1)
     2
     """
-    for i in range(left, right):
-        if array[i] == target:
-            return i
-    return -1
+    return next((i for i in range(left, right) if array[i] == target), -1)
 
 
 def ite_ternary_search(array: list[int], target: int) -> int:
@@ -106,8 +103,7 @@ def ite_ternary_search(array: list[int], target: int) -> int:
 
             left = one_third + 1
             right = two_third - 1
-    else:
-        return -1
+    return -1
 
 
 def rec_ternary_search(left: int, right: int, array: list[int], target: int) -> int:

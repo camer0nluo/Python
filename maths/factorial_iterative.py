@@ -24,8 +24,6 @@ def factorial(number: int) -> int:
     >>> factorial(0)
     1
     """
-    if number != int(number):
-        raise ValueError("factorial() only accepts integral values")
     if number < 0:
         raise ValueError("factorial() not defined for negative values")
     value = 1

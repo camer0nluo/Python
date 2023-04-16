@@ -103,10 +103,8 @@ def astar(world, start, goal):
     >>> astar(p, start, goal)
     [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4)]
     """
-    _open = []
     _closed = []
-    _open.append(start)
-
+    _open = [start]
     while _open:
         min_f = np.argmin([n.f for n in _open])
         current = _open[min_f]

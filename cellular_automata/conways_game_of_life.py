@@ -34,12 +34,12 @@ def new_generation(cells: list[list[int]]) -> list[list[int]]:
         for j in range(len(cells[i])):
             # Get the number of live neighbours
             neighbour_count = 0
-            if i > 0 and j > 0:
-                neighbour_count += cells[i - 1][j - 1]
             if i > 0:
+                if j > 0:
+                    neighbour_count += cells[i - 1][j - 1]
                 neighbour_count += cells[i - 1][j]
-            if i > 0 and j < len(cells[i]) - 1:
-                neighbour_count += cells[i - 1][j + 1]
+                if j < len(cells[i]) - 1:
+                    neighbour_count += cells[i - 1][j + 1]
             if j > 0:
                 neighbour_count += cells[i][j - 1]
             if j < len(cells[i]) - 1:

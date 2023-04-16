@@ -71,10 +71,14 @@ def solution(number_unique_partitions: int = 5000) -> int | None:
     >>> solution(1000)
     53
     """
-    for number_to_partition in range(1, NUM_PRIMES):
-        if len(partition(number_to_partition)) > number_unique_partitions:
-            return number_to_partition
-    return None
+    return next(
+        (
+            number_to_partition
+            for number_to_partition in range(1, NUM_PRIMES)
+            if len(partition(number_to_partition)) > number_unique_partitions
+        ),
+        None,
+    )
 
 
 if __name__ == "__main__":

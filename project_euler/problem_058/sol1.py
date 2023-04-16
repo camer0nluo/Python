@@ -52,10 +52,7 @@ def is_prime(number: int) -> int:
     if number % 2 == 0 and number > 2:
         return 0
 
-    for i in range(3, isqrt(number) + 1, 2):
-        if number % i == 0:
-            return 0
-    return 1
+    return next((0 for i in range(3, isqrt(number) + 1, 2) if number % i == 0), 1)
 
 
 def solution(ratio: float = 0.1) -> int:
@@ -75,7 +72,7 @@ def solution(ratio: float = 0.1) -> int:
     primes = 3
 
     while primes / (2 * j - 1) >= ratio:
-        for i in range(j * j + j + 1, (j + 2) * (j + 2), j + 1):
+        for i in range(j**2 + j + 1, (j + 2) * (j + 2), j + 1):
             primes += is_prime(i)
         j += 2
     return j

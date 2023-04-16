@@ -19,7 +19,7 @@ N_STEPS = 1000
 
 
 def f(x: float) -> float:
-    return x * x
+    return x**2
 
 
 """
@@ -92,15 +92,14 @@ def simpson_integration(function, a: float, b: float, precision: int = 4) -> flo
     assert callable(
         function
     ), f"the function(object) passed should be callable your input : {function}"
-    assert isinstance(a, float) or isinstance(
-        a, int
+    assert isinstance(
+        a, (float, int)
     ), f"a should be float or integer your input : {a}"
-    assert isinstance(function(a), float) or isinstance(function(a), int), (
-        "the function should return integer or float return type of your function, "
-        f"{type(a)}"
-    )
-    assert isinstance(b, float) or isinstance(
-        b, int
+    assert isinstance(
+        function(a), (float, int)
+    ), f"the function should return integer or float return type of your function, {type(a)}"
+    assert isinstance(
+        b, (float, int)
     ), f"b should be float or integer your input : {b}"
     assert (
         isinstance(precision, int) and precision > 0

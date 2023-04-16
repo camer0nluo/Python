@@ -221,13 +221,12 @@ def area_triangle_three_sides(side1: float, side2: float, side3: float) -> float
     elif side1 + side2 < side3 or side1 + side3 < side2 or side2 + side3 < side1:
         raise ValueError("Given three sides do not form a triangle")
     semi_perimeter = (side1 + side2 + side3) / 2
-    area = sqrt(
+    return sqrt(
         semi_perimeter
         * (semi_perimeter - side1)
         * (semi_perimeter - side2)
         * (semi_perimeter - side3)
     )
-    return area
 
 
 def area_parallelogram(base: float, height: float) -> float:

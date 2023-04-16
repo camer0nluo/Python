@@ -49,9 +49,7 @@ def fibonacci(n: int) -> int:
         return 1
     else:
         sequence = [0, 1]
-        for i in range(2, n + 1):
-            sequence.append(sequence[i - 1] + sequence[i - 2])
-
+        sequence.extend(sequence[i - 1] + sequence[i - 2] for i in range(2, n + 1))
         return sequence[n]
 
 

@@ -19,11 +19,11 @@ def minDist(mdist, vset, V):
 
 
 def Dijkstra(graph, V, src):
-    mdist = [float("inf") for i in range(V)]
-    vset = [False for i in range(V)]
+    mdist = [float("inf") for _ in range(V)]
+    vset = [False for _ in range(V)]
     mdist[src] = 0.0
 
-    for i in range(V - 1):
+    for _ in range(V - 1):
         u = minDist(mdist, vset, V)
         vset[u] = True
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
     V = int(input("Enter number of vertices: ").strip())
     E = int(input("Enter number of edges: ").strip())
 
-    graph = [[float("inf") for i in range(V)] for j in range(V)]
+    graph = [[float("inf") for _ in range(V)] for _ in range(V)]
 
     for i in range(V):
         graph[i][i] = 0.0

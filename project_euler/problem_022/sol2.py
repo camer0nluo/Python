@@ -25,7 +25,7 @@ def solution():
     """
     total_sum = 0
     temp_sum = 0
-    with open(os.path.dirname(__file__) + "/p022_names.txt") as file:
+    with open(f"{os.path.dirname(__file__)}/p022_names.txt") as file:
         name = str(file.readlines()[0])
         name = name.replace('"', "").split(",")
 

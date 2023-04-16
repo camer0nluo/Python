@@ -32,7 +32,7 @@ def is_palindrome(n: int | str) -> bool:
     False
     """
     n = str(n)
-    return True if n == n[::-1] else False
+    return n == n[::-1]
 
 
 def solution(n: int = 1000000):
@@ -56,12 +56,11 @@ def solution(n: int = 1000000):
     >>> solution(1)
     0
     """
-    total = 0
-
-    for i in range(1, n):
-        if is_palindrome(i) and is_palindrome(bin(i).split("b")[1]):
-            total += i
-    return total
+    return sum(
+        i
+        for i in range(1, n)
+        if is_palindrome(i) and is_palindrome(bin(i).split("b")[1])
+    )
 
 
 if __name__ == "__main__":

@@ -103,7 +103,7 @@ def solution(num_terms: int = 60, max_start: int = 1000000) -> int:
     >>> solution(10,1000)
     28
     """
-    return sum(1 for i in range(1, max_start) if chain_length(i) == num_terms)
+    return sum(chain_length(i) == num_terms for i in range(1, max_start))
 
 
 if __name__ == "__main__":

@@ -169,9 +169,9 @@ def main():
     predictions = np.array([tree.predict(x) for x in test_cases])
     avg_error = np.mean((predictions - test_cases) ** 2)
 
-    print("Test values: " + str(test_cases))
-    print("Predictions: " + str(predictions))
-    print("Average error: " + str(avg_error))
+    print(f"Test values: {str(test_cases)}")
+    print(f"Predictions: {str(predictions)}")
+    print(f"Average error: {str(avg_error)}")
 
 
 if __name__ == "__main__":

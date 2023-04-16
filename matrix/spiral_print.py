@@ -40,7 +40,7 @@ def spiralPrint(a):
             return
 
         # horizotal printing increasing
-        for i in range(0, matCol):
+        for i in range(matCol):
             print(a[0][i]),
         # vertical printing down
         for i in range(1, matRow):
@@ -52,8 +52,7 @@ def spiralPrint(a):
         # vertical printing up
         for i in range(matRow - 2, 0, -1):
             print(a[i][0]),
-        remainMat = [row[1 : matCol - 1] for row in a[1 : matRow - 1]]
-        if len(remainMat) > 0:
+        if remainMat := [row[1 : matCol - 1] for row in a[1 : matRow - 1]]:
             spiralPrint(remainMat)
         else:
             return

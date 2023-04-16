@@ -65,10 +65,7 @@ class Node:
         """
         dy = self.pos_x - self.goal_x
         dx = self.pos_y - self.goal_y
-        if HEURISTIC == 1:
-            return abs(dx) + abs(dy)
-        else:
-            return sqrt(dy**2 + dx**2)
+        return abs(dx) + abs(dy) if HEURISTIC == 1 else sqrt(dy**2 + dx**2)
 
     def __lt__(self, other: Node) -> bool:
         return self.f_cost < other.f_cost
@@ -235,8 +232,7 @@ class BidirectionalAStar:
         bwd_path = self.bwd_astar.retrace_path(bwd_node)
         bwd_path.pop()
         bwd_path.reverse()
-        path = fwd_path + bwd_path
-        return path
+        return fwd_path + bwd_path
 
 
 if __name__ == "__main__":

@@ -21,7 +21,7 @@ def oct_to_decimal(oct_string: str) -> int:
     ...
     ValueError: Non-octal value was passed to the function
     """
-    oct_string = str(oct_string).strip()
+    oct_string = oct_string.strip()
     if not oct_string:
         raise ValueError("Empty string was passed to the function")
     is_negative = oct_string[0] == "-"

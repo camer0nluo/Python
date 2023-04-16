@@ -74,7 +74,7 @@ def solution(number: int = 10000000) -> int:
     >>> solution(10000000)
     8581146
     """
-    return sum(1 for i in range(1, number) if not chain(i))
+    return sum(not chain(i) for i in range(1, number))
 
 
 if __name__ == "__main__":

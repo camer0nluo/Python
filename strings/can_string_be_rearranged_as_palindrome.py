@@ -39,7 +39,7 @@ def can_string_be_rearranged_as_palindrome(input_str: str = "") -> bool:
     >>> can_string_be_rearranged_as_palindrome_counter("A man a plan a canal Panama")
     True
     """
-    if len(input_str) == 0:
+    if not input_str:
         return True
     lower_case_input_str = input_str.replace(" ", "").lower()
     # character_freq_dict: Stores the frequency of every character in the input string
@@ -67,14 +67,11 @@ def can_string_be_rearranged_as_palindrome(input_str: str = "") -> bool:
     Step 2:If we find more than 1 character that appears odd number of times,
     It is not possible to rearrange as a palindrome
     """
-    oddChar = 0
-
-    for character_count in character_freq_dict.values():
-        if character_count % 2:
-            oddChar += 1
-    if oddChar > 1:
-        return False
-    return True
+    oddChar = sum(
+        bool(character_count % 2)
+        for character_count in character_freq_dict.values()
+    )
+    return oddChar <= 1
 
 
 def benchmark(input_str: str = "") -> None:

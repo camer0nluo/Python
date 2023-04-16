@@ -26,7 +26,7 @@ def gabor_filter_kernel(
     # prepare kernel
     # the kernel size have to be odd
     if (ksize % 2) == 0:
-        ksize = ksize + 1
+        ksize += 1
     gabor = np.zeros((ksize, ksize), dtype=np.float32)
 
     # each value

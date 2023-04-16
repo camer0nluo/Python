@@ -34,7 +34,7 @@ def twos_complement(number: int) -> str:
         if number < 0
         else "0"
     )
-    return "0b" + twos_complement_number
+    return f"0b{twos_complement_number}"
 
 
 if __name__ == "__main__":

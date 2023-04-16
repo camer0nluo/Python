@@ -63,9 +63,10 @@ def solution(target: int = 2000000) -> int:
     triangle_numbers: list[int] = [0]
     idx: int
 
-    for idx in range(1, ceil(sqrt(target * 2) * 1.1)):
-        triangle_numbers.append(triangle_numbers[-1] + idx)
-
+    triangle_numbers.extend(
+        triangle_numbers[-1] + idx
+        for idx in range(1, ceil(sqrt(target * 2) * 1.1))
+    )
     # we want this to be as close as possible to target
     best_product: int = 0
     # the area corresponding to the grid that gives the product closest to target

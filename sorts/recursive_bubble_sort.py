@@ -33,7 +33,7 @@ def bubble_sort(list_data: list, length: int = 0) -> list:
             list_data[i], list_data[i + 1] = list_data[i + 1], list_data[i]
             swapped = True
 
-    return list_data if not swapped else bubble_sort(list_data, length - 1)
+    return bubble_sort(list_data, length - 1) if swapped else list_data
 
 
 if __name__ == "__main__":

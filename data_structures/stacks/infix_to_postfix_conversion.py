@@ -65,5 +65,5 @@ if __name__ == "__main__":
     expression = "a+b*(c^d-e)^(f+g*h)-i"
 
     print("Infix to Postfix Notation demonstration:\n")
-    print("Infix notation: " + expression)
-    print("Postfix notation: " + infix_to_postfix(expression))
+    print(f"Infix notation: {expression}")
+    print(f"Postfix notation: {infix_to_postfix(expression)}")

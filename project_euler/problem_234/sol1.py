@@ -43,10 +43,7 @@ def prime_sieve(n: int) -> list:
 
     primes = [2]
 
-    for i in range(3, n, 2):
-        if is_prime[i]:
-            primes.append(i)
-
+    primes.extend(i for i in range(3, n, 2) if is_prime[i])
     return primes
 
 

@@ -32,13 +32,13 @@ def add_key_to_lexicon(
     Adds new strings (curr_string + "0",  curr_string + "1") to the lexicon
     """
     lexicon.pop(curr_string)
-    lexicon[curr_string + "0"] = last_match_id
+    lexicon[f"{curr_string}0"] = last_match_id
 
     if math.log2(index).is_integer():
         for curr_key in lexicon:
-            lexicon[curr_key] = "0" + lexicon[curr_key]
+            lexicon[curr_key] = f"0{lexicon[curr_key]}"
 
-    lexicon[curr_string + "1"] = bin(index)[2:]
+    lexicon[f"{curr_string}1"] = bin(index)[2:]
 
 
 def compress_data(data_bits: str) -> str:

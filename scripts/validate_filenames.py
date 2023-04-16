@@ -29,8 +29,7 @@ if nodir_files:
     print(f"{len(nodir_files)} files are not in a directory:")
     print("\n".join(nodir_files) + "\n")
 
-bad_files = len(upper_files + space_files + hyphen_files + nodir_files)
-if bad_files:
+if bad_files := len(upper_files + space_files + hyphen_files + nodir_files):
     import sys
 
     sys.exit(bad_files)

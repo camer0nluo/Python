@@ -23,7 +23,7 @@ def solution():
     >>> solution()
     871198282
     """
-    with open(os.path.dirname(__file__) + "/p022_names.txt") as file:
+    with open(f"{os.path.dirname(__file__)}/p022_names.txt") as file:
         names = str(file.readlines()[0])
         names = names.replace('"', "").split(",")
 

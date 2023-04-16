@@ -43,14 +43,14 @@ def solution(n: int = 600851475143) -> int:
     """
 
     try:
-        n = int(n)
+        n = n
     except (TypeError, ValueError):
         raise TypeError("Parameter n must be int or castable to int.")
     if n <= 0:
         raise ValueError("Parameter n must be greater than or equal to one.")
     prime = 1
     i = 2
-    while i * i <= n:
+    while i**2 <= n:
         while n % i == 0:
             prime = i
             n //= i

@@ -57,8 +57,7 @@ def dj_oracle(case: str, num_qubits: int) -> q.QuantumCircuit:
             if bit == "1":
                 oracle_qc.x(index)
 
-    # Case in which oracle is constant
-    if case == "constant":
+    elif case == "constant":
         # First decide what the fixed output of the oracle will be
         # (either always 0 or always 1)
         output = np.random.randint(2)

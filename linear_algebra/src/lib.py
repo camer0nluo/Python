@@ -108,7 +108,7 @@ class Vector:
         mul implements the scalar multiplication
         and the dot-product
         """
-        if isinstance(other, float) or isinstance(other, int):
+        if isinstance(other, (float, int)):
             ans = [c * other for c in self.__components]
             return Vector(ans)
         elif isinstance(other, Vector) and len(self) == len(other):
@@ -190,10 +190,7 @@ class Vector:
         """
         num = self * other
         den = self.euclidean_length() * other.euclidean_length()
-        if deg:
-            return math.degrees(math.acos(num / den))
-        else:
-            return math.acos(num / den)
+        return math.degrees(math.acos(num / den)) if deg else math.acos(num / den)
 
 
 def zero_vector(dimension: int) -> Vector:
@@ -227,7 +224,7 @@ def axpy(scalar: float, x: Vector, y: Vector) -> Vector:
     assert (
         isinstance(x, Vector)
         and isinstance(y, Vector)
-        and (isinstance(scalar, int) or isinstance(scalar, float))
+        and (isinstance(scalar, (int, float)))
     )
     return x * scalar + y
 
@@ -283,7 +280,7 @@ class Matrix:
             ans += "|"
             for j in range(self.__width):
                 if j < self.__width - 1:
-                    ans += str(self.__matrix[i][j]) + ","
+                    ans += f"{str(self.__matrix[i][j])},"
                 else:
                     ans += str(self.__matrix[i][j]) + "|\n"
         return ans
@@ -292,33 +289,31 @@ class Matrix:
         """
         implements matrix addition.
         """
-        if self.__width == other.width() and self.__height == other.height():
-            matrix = []
-            for i in range(self.__height):
-                row = [
-                    self.__matrix[i][j] + other.component(i, j)
-                    for j in range(self.__width)
-                ]
-                matrix.append(row)
-            return Matrix(matrix, self.__width, self.__height)
-        else:
+        if self.__width != other.width() or self.__height != other.height():
             raise Exception("matrix must have the same dimension!")
+        matrix = []
+        for i in range(self.__height):
+            row = [
+                self.__matrix[i][j] + other.component(i, j)
+                for j in range(self.__width)
+            ]
+            matrix.append(row)
+        return Matrix(matrix, self.__width, self.__height)
 
     def __sub__(self, other: Matrix) -> Matrix:
         """
         implements matrix subtraction.
         """
-        if self.__width == other.width() and self.__height == other.height():
-            matrix = []
-            for i in range(self.__height):
-                row = [
-                    self.__matrix[i][j] - other.component(i, j)
-                    for j in range(self.__width)
-                ]
-                matrix.append(row)
-            return Matrix(matrix, self.__width, self.__height)
-        else:
+        if self.__width != other.width() or self.__height != other.height():
             raise Exception("matrices must have the same dimension!")
+        matrix = []
+        for i in range(self.__height):
+            row = [
+                self.__matrix[i][j] - other.component(i, j)
+                for j in range(self.__width)
+            ]
+            matrix.append(row)
+        return Matrix(matrix, self.__width, self.__height)
 
     @overload
     def __mul__(self, other: float) -> Matrix:
@@ -334,21 +329,20 @@ class Matrix:
         implements the matrix-scalar multiplication
         """
         if isinstance(other, Vector):  # matrix-vector
-            if len(other) == self.__width:
-                ans = zero_vector(self.__height)
-                for i in range(self.__height):
-                    prods = [
-                        self.__matrix[i][j] * other.component(j)
-                        for j in range(self.__width)
-                    ]
-                    ans.change_component(i, sum(prods))
-                return ans
-            else:
+            if len(other) != self.__width:
                 raise Exception(
                     "vector must have the same size as the "
                     "number of columns of the matrix!"
                 )
-        elif isinstance(other, int) or isinstance(other, float):  # matrix-scalar
+            ans = zero_vector(self.__height)
+            for i in range(self.__height):
+                prods = [
+                    self.__matrix[i][j] * other.component(j)
+                    for j in range(self.__width)
+                ]
+                ans.change_component(i, sum(prods))
+            return ans
+        elif isinstance(other, (int, float)):  # matrix-scalar
             matrix = [
                 [self.__matrix[i][j] * other for j in range(self.__width)]
                 for i in range(self.__height)

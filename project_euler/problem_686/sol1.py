@@ -38,9 +38,7 @@ def log_difference(number: int) -> float:
     """
 
     log_number = math.log(2, 10) * number
-    difference = round((log_number - int(log_number)), 15)
-
-    return difference
+    return round((log_number - int(log_number)), 15)
 
 
 def solution(number: int = 678910) -> int:

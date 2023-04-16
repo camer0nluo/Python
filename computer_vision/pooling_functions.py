@@ -35,14 +35,8 @@ def maxpooling(arr: np.ndarray, size: int, stride: int) -> np.ndarray:
     # initialize the output matrix with zeros of shape maxpool_shape
     updated_arr = np.zeros((maxpool_shape, maxpool_shape))
 
-    while i < arr.shape[0]:
-        if i + size > arr.shape[0]:
-            # if the end of the matrix is reached, break
-            break
-        while j < arr.shape[1]:
-            # if the end of the matrix is reached, break
-            if j + size > arr.shape[1]:
-                break
+    while i < arr.shape[0] and not i + size > arr.shape[0]:
+        while j < arr.shape[1] and not j + size > arr.shape[1]:
             # compute the maximum of the pooling matrix
             updated_arr[mat_i][mat_j] = np.max(arr[i : i + size, j : j + size])
             # shift the pooling matrix by stride of column pixels
@@ -91,14 +85,8 @@ def avgpooling(arr: np.ndarray, size: int, stride: int) -> np.ndarray:
     # initialize the output matrix with zeros of shape avgpool_shape
     updated_arr = np.zeros((avgpool_shape, avgpool_shape))
 
-    while i < arr.shape[0]:
-        # if the end of the matrix is reached, break
-        if i + size > arr.shape[0]:
-            break
-        while j < arr.shape[1]:
-            # if the end of the matrix is reached, break
-            if j + size > arr.shape[1]:
-                break
+    while i < arr.shape[0] and not i + size > arr.shape[0]:
+        while j < arr.shape[1] and not j + size > arr.shape[1]:
             # compute the average of the pooling matrix
             updated_arr[mat_i][mat_j] = int(np.average(arr[i : i + size, j : j + size]))
             # shift the pooling matrix by stride of column pixels

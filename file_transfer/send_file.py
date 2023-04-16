@@ -16,12 +16,9 @@ def send_file(filename: str = "mytext.txt", testing: bool = False) -> None:
         print(f"Server received: {data = }")
 
         with open(filename, "rb") as in_file:
-            data = in_file.read(1024)
-            while data:
+            while data := in_file.read(1024):
                 conn.send(data)
                 print(f"Sent {data!r}")
-                data = in_file.read(1024)
-
         print("Done sending")
         conn.close()
         if testing:  # Allow the test to complete

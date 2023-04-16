@@ -41,10 +41,7 @@ def is_prime(num: int) -> bool:
         return True
     elif num % 2 == 0:
         return False
-    for i in range(3, int(math.sqrt(num)) + 1, 2):
-        if num % i == 0:
-            return False
-    return True
+    return all(num % i != 0 for i in range(3, int(math.sqrt(num)) + 1, 2))
 
 
 def solution(n: int = 600851475143) -> int:
@@ -78,7 +75,7 @@ def solution(n: int = 600851475143) -> int:
     """
 
     try:
-        n = int(n)
+        n = n
     except (TypeError, ValueError):
         raise TypeError("Parameter n must be int or castable to int.")
     if n <= 0:

@@ -17,13 +17,9 @@ def search(
     heuristic: list[list[int]],
 ) -> tuple[list[list[int]], list[list[int]]]:
 
-    closed = [
-        [0 for col in range(len(grid[0]))] for row in range(len(grid))
-    ]  # the reference grid
+    closed = [[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
     closed[init[0]][init[1]] = 1
-    action = [
-        [0 for col in range(len(grid[0]))] for row in range(len(grid))
-    ]  # the action grid
+    action = [[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
 
     x = init[0]
     y = init[1]
@@ -35,33 +31,37 @@ def search(
     resign = False  # flag set if we can't find expand
 
     while not found and not resign:
-        if len(cell) == 0:
+        if not cell:
             raise ValueError("Algorithm is unable to find solution")
-        else:  # to choose the least costliest action so as to move closer to the goal
-            cell.sort()
-            cell.reverse()
-            next = cell.pop()
-            x = next[2]
-            y = next[3]
-            g = next[1]
+        cell.sort()
+        cell.reverse()
+        next = cell.pop()
+        x = next[2]
+        y = next[3]
+        g = next[1]
 
-            if x == goal[0] and y == goal[1]:
-                found = True
-            else:
-                for i in range(len(DIRECTIONS)):  # to try out different valid actions
-                    x2 = x + DIRECTIONS[i][0]
-                    y2 = y + DIRECTIONS[i][1]
-                    if x2 >= 0 and x2 < len(grid) and y2 >= 0 and y2 < len(grid[0]):
-                        if closed[x2][y2] == 0 and grid[x2][y2] == 0:
-                            g2 = g + cost
-                            f2 = g2 + heuristic[x2][y2]
-                            cell.append([f2, g2, x2, y2])
-                            closed[x2][y2] = 1
-                            action[x2][y2] = i
-    invpath = []
+        if x == goal[0] and y == goal[1]:
+            found = True
+        else:
+            for i in range(len(DIRECTIONS)):  # to try out different valid actions
+                x2 = x + DIRECTIONS[i][0]
+                y2 = y + DIRECTIONS[i][1]
+                if (
+                    x2 >= 0
+                    and x2 < len(grid)
+                    and y2 >= 0
+                    and y2 < len(grid[0])
+                    and closed[x2][y2] == 0
+                    and grid[x2][y2] == 0
+                ):
+                    g2 = g + cost
+                    f2 = g2 + heuristic[x2][y2]
+                    cell.append([f2, g2, x2, y2])
+                    closed[x2][y2] = 1
+                    action[x2][y2] = i
     x = goal[0]
     y = goal[1]
-    invpath.append([x, y])  # we get the reverse path from here
+    invpath = [[x, y]]
     while x != init[0] or y != init[1]:
         x2 = x - DIRECTIONS[action[x][y]][0]
         y2 = y - DIRECTIONS[action[x][y]][1]
@@ -69,9 +69,7 @@ def search(
         y = y2
         invpath.append([x, y])
 
-    path = []
-    for i in range(len(invpath)):
-        path.append(invpath[len(invpath) - 1 - i])
+    path = [invpath[len(invpath) - 1 - i] for i in range(len(invpath))]
     return path, action
 
 
@@ -90,7 +88,7 @@ if __name__ == "__main__":
     cost = 1
 
     # the cost map which pushes the path closer to the goal
-    heuristic = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
+    heuristic = [[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             heuristic[i][j] = abs(i - goal[0]) + abs(j - goal[1])

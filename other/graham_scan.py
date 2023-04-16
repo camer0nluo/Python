@@ -49,10 +49,9 @@ def graham_scan(points: list[tuple[int, int]]) -> list[tuple[int, int]]:
             miny = y
             minx = x
             minidx = i
-        if y == miny:
-            if x < minx:
-                minx = x
-                minidx = i
+        if y == miny and x < minx:
+            minx = x
+            minidx = i
 
     # remove the lowest and the most left point from points for preparing for sort
     points.pop(minidx)
@@ -87,8 +86,6 @@ def graham_scan(points: list[tuple[int, int]]) -> list[tuple[int, int]]:
     # I'm using insert just for easy understanding.
     sorted_points.insert(0, (minx, miny))
 
-    # traversal from the lowest and the most left point in anti-clockwise direction
-    # if direction gets right, the previous point is not the convex hull.
     class Direction(Enum):
         left = 1
         straight = 2

@@ -50,7 +50,7 @@ def sum_reverse(n: int) -> int:
     >>> sum_reverse(12)
     33
     """
-    return int(n) + int(str(n)[::-1])
+    return n + int(str(n)[::-1])
 
 
 def solution(limit: int = 10000) -> int:

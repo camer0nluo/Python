@@ -17,13 +17,7 @@ def palindromic_string(input_string: str) -> str:
     """
     max_length = 0
 
-    # if input_string is "aba" than new_input_string become "a|b|a"
-    new_input_string = ""
-    output_string = ""
-
-    # append each character + "|" in new_string for range(0, length-1)
-    for i in input_string[: len(input_string) - 1]:
-        new_input_string += i + "|"
+    new_input_string = "".join(f"{i}|" for i in input_string[:-1])
     # append last character
     new_input_string += input_string[-1]
 
@@ -32,7 +26,7 @@ def palindromic_string(input_string: str) -> str:
     l, r = 0, 0
 
     # length[i] shows the length of palindromic substring with center i
-    length = [1 for i in range(len(new_input_string))]
+    length = [1 for _ in range(len(new_input_string))]
 
     # for each character in new_string find corresponding palindromic string
     start = 0
@@ -60,11 +54,7 @@ def palindromic_string(input_string: str) -> str:
 
     # create that string
     s = new_input_string[start - max_length // 2 : start + max_length // 2 + 1]
-    for i in s:
-        if i != "|":
-            output_string += i
-
-    return output_string
+    return "".join(i for i in s if i != "|")
 
 
 if __name__ == "__main__":

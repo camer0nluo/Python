@@ -54,7 +54,7 @@ def calculate_prob(text: str) -> None:
     3.0
     """
     single_char_strings, two_char_strings = analyze_text(text)
-    my_alphas = list(" " + ascii_lowercase)
+    my_alphas = list(f" {ascii_lowercase}")
     # what is our total sum of probabilities.
     all_sum = sum(single_char_strings.values())
 
@@ -100,8 +100,8 @@ def analyze_text(text: str) -> tuple[dict, dict]:
     single_char_strings[text[-1]] += 1
 
     # first case when we have space at start.
-    two_char_strings[" " + text[0]] += 1
-    for i in range(0, len(text) - 1):
+    two_char_strings[f" {text[0]}"] += 1
+    for i in range(len(text) - 1):
         single_char_strings[text[i]] += 1
         two_char_strings[text[i : i + 2]] += 1
     return single_char_strings, two_char_strings

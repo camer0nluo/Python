@@ -13,7 +13,7 @@ Example: [10, 22, 9, 33, 21, 50, 41, 60, 80] as input will return
 from __future__ import annotations
 
 
-def longest_subsequence(array: list[int]) -> list[int]:  # This function is recursive
+def longest_subsequence(array: list[int]) -> list[int]:    # This function is recursive
     """
     Some examples
     >>> longest_subsequence([10, 22, 9, 33, 21, 50, 41, 60, 80])
@@ -49,10 +49,7 @@ def longest_subsequence(array: list[int]) -> list[int]:  # This function is recu
 
     temp_array = [element for element in array[1:] if element >= pivot]
     temp_array = [pivot] + longest_subsequence(temp_array)
-    if len(temp_array) > len(longest_subseq):
-        return temp_array
-    else:
-        return longest_subseq
+    return temp_array if len(temp_array) > len(longest_subseq) else longest_subseq
 
 
 if __name__ == "__main__":

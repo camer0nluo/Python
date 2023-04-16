@@ -21,15 +21,13 @@ def check_pangram(
     >>> check_pangram()
     True
     """
-    frequency = set()
     input_str = input_str.replace(
         " ", ""
     )  # Replacing all the Whitespaces in our sentence
-    for alpha in input_str:
-        if "a" <= alpha.lower() <= "z":
-            frequency.add(alpha.lower())
-
-    return True if len(frequency) == 26 else False
+    frequency = {
+        alpha.lower() for alpha in input_str if "a" <= alpha.lower() <= "z"
+    }
+    return len(frequency) == 26
 
 
 def check_pangram_faster(

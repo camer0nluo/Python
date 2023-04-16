@@ -57,7 +57,7 @@ def lomuto_partition(sorting: list, left: int, right: int) -> int:
     """
     pivot = sorting[right]
     store_index = left
-    for i in range(left, right):
+    for i in range(store_index, right):
         if sorting[i] < pivot:
             sorting[store_index], sorting[i] = sorting[i], sorting[store_index]
             store_index += 1

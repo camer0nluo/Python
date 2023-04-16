@@ -43,10 +43,10 @@ def is_substring_divisible(num: tuple) -> bool:
         return False
 
     tests = [7, 11, 13, 17]
-    for i, test in enumerate(tests):
-        if (num[i + 4] * 100 + num[i + 5] * 10 + num[i + 6]) % test != 0:
-            return False
-    return True
+    return all(
+        (num[i + 4] * 100 + num[i + 5] * 10 + num[i + 6]) % test == 0
+        for i, test in enumerate(tests)
+    )
 
 
 def solution(n: int = 10) -> int:

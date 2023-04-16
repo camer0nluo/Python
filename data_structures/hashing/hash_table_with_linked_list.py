@@ -20,8 +20,9 @@ class HashTableWithLinkedList(HashTable):
         )
 
     def _collision_resolution(self, key, data=None):
-        if not (
-            len(self.values[key]) == self.charge_factor and self.values.count(None) == 0
-        ):
-            return key
-        return super()._collision_resolution(key, data)
+        return (
+            key
+            if len(self.values[key]) != self.charge_factor
+            or self.values.count(None) != 0
+            else super()._collision_resolution(key, data)
+        )

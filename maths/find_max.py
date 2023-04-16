@@ -16,7 +16,7 @@ def find_max(nums: list[int | float]) -> int | float:
         ...
     ValueError: find_max() arg is an empty sequence
     """
-    if len(nums) == 0:
+    if not nums:
         raise ValueError("find_max() arg is an empty sequence")
     max_num = nums[0]
     for x in nums:

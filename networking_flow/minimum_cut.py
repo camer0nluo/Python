@@ -24,7 +24,7 @@ def BFS(graph, s, t, parent):
                 visited[ind] = True
                 parent[ind] = u
 
-    return True if visited[t] else False
+    return bool(visited[t])
 
 
 def mincut(graph, source, sink):
@@ -55,10 +55,11 @@ def mincut(graph, source, sink):
             v = parent[v]
 
     for i in range(len(graph)):
-        for j in range(len(graph[0])):
-            if graph[i][j] == 0 and temp[i][j] > 0:
-                res.append((i, j))
-
+        res.extend(
+            (i, j)
+            for j in range(len(graph[0]))
+            if graph[i][j] == 0 and temp[i][j] > 0
+        )
     return res
 
 

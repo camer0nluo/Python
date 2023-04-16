@@ -4,20 +4,16 @@ import math
 class Graph:
     def __init__(self, N=0):  # a graph with Node 0,1,...,N-1
         self.N = N
-        self.W = [
-            [math.inf for j in range(0, N)] for i in range(0, N)
-        ]  # adjacency matrix for weight
-        self.dp = [
-            [math.inf for j in range(0, N)] for i in range(0, N)
-        ]  # dp[i][j] stores minimum distance from i to j
+        self.W = [[math.inf for _ in range(N)] for _ in range(N)]
+        self.dp = [[math.inf for _ in range(N)] for _ in range(N)]
 
     def addEdge(self, u, v, w):
         self.dp[u][v] = w
 
     def floyd_warshall(self):
-        for k in range(0, self.N):
-            for i in range(0, self.N):
-                for j in range(0, self.N):
+        for k in range(self.N):
+            for i in range(self.N):
+                for j in range(self.N):
                     self.dp[i][j] = min(self.dp[i][j], self.dp[i][k] + self.dp[k][j])
 
     def showMin(self, u, v):

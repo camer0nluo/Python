@@ -35,7 +35,7 @@ def unique_prime_factors(n: int) -> set:
     """
     i = 2
     factors = set()
-    while i * i <= n:
+    while i**2 <= n:
         if n % i:
             i += 1
         else:
@@ -66,7 +66,7 @@ def equality(iterable: list) -> bool:
     >>> equality([1, 2, 3, 2, 1])
     False
     """
-    return len(set(iterable)) in (0, 1)
+    return len(set(iterable)) in {0, 1}
 
 
 def run(n: int) -> list:

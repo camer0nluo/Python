@@ -1,7 +1,7 @@
 class Graph:
     def __init__(self, vertex):
         self.vertex = vertex
-        self.graph = [[0] * vertex for i in range(vertex)]
+        self.graph = [[0] * vertex for _ in range(vertex)]
 
     def add_edge(self, u, v):
         self.graph[u - 1][v - 1] = 1

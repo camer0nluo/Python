@@ -54,7 +54,7 @@ def get_frequency_table(edge_array):
     Returns Frequency Table
     """
     distinct_edge = get_distinct_edge(edge_array)
-    frequency_table = dict()
+    frequency_table = {}
 
     for item in distinct_edge:
         bit = get_bitcode(edge_array, item)
@@ -62,12 +62,12 @@ def get_frequency_table(edge_array):
         # bt=''.join(bit)
         s = bit.count("1")
         frequency_table[item] = [s, bit]
-    # Store [Distinct edge, WT(Bitcode), Bitcode] in descending order
-    sorted_frequency_table = [
+    return [
         [k, v[0], v[1]]
-        for k, v in sorted(frequency_table.items(), key=lambda v: v[1][0], reverse=True)
+        for k, v in sorted(
+            frequency_table.items(), key=lambda v: v[1][0], reverse=True
+        )
     ]
-    return sorted_frequency_table
 
 
 def get_nodes(frequency_table):
@@ -79,7 +79,7 @@ def get_nodes(frequency_table):
     {'11111': ['ab', 'ac', 'df', 'bd', 'bc']}
     """
     nodes = {}
-    for i, item in enumerate(frequency_table):
+    for item in frequency_table:
         nodes.setdefault(item[2], []).append(item[0])
     return nodes
 
@@ -155,16 +155,16 @@ def construct_graph(cluster, nodes):
     cluster[max(cluster.keys()) + 1] = "Header"
     graph = {}
     for i in X:
-        if tuple(["Header"]) in graph:
-            graph[tuple(["Header"])].append(X[i])
+        if ("Header",) in graph:
+            graph[("Header", )].append(X[i])
         else:
-            graph[tuple(["Header"])] = [X[i]]
+            graph[("Header", )] = [X[i]]
     for i in X:
         graph[tuple(X[i])] = [["Header"]]
     i = 1
     while i < max(cluster) - 1:
         create_edge(nodes, graph, cluster, i)
-        i = i + 1
+        i += 1
     return graph
 
 
@@ -186,7 +186,7 @@ def find_freq_subgraph_given_support(s, cluster, graph):
     """
     k = int(s / 100 * (len(cluster) - 1))
     for i in cluster[k].keys():
-        myDFS(graph, tuple(cluster[k][i]), tuple(["Header"]))
+        myDFS(graph, tuple(cluster[k][i]), ("Header", ))
 
 
 def freq_subgraphs_edge_list(paths):

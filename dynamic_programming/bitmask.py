@@ -19,7 +19,7 @@ class AssignmentUsingBitmask:
         # DP table will have a dimension of (2^M)*N
         # initially all values are set to -1
         self.dp = [
-            [-1 for i in range(total + 1)] for j in range(2 ** len(task_performed))
+            [-1 for _ in range(total + 1)] for _ in range(2 ** len(task_performed))
         ]
 
         self.task = defaultdict(list)  # stores the list of persons for each task

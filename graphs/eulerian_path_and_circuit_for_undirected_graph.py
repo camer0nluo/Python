@@ -27,9 +27,7 @@ def check_circuit_or_path(graph, max_node):
             odd_node = i
     if odd_degree_nodes == 0:
         return 1, odd_node
-    if odd_degree_nodes == 2:
-        return 2, odd_node
-    return 3, odd_node
+    return (2, odd_node) if odd_degree_nodes == 2 else (3, odd_node)
 
 
 def check_euler(graph, max_node):

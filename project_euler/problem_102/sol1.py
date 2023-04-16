@@ -64,16 +64,13 @@ def solution(filename: str = "p102_triangles.txt") -> int:
     """
     data: str = Path(__file__).parent.joinpath(filename).read_text(encoding="utf-8")
 
-    triangles: list[list[int]] = []
-    for line in data.strip().split("\n"):
-        triangles.append([int(number) for number in line.split(",")])
-
-    ret: int = 0
+    triangles: list[list[int]] = [
+        [int(number) for number in line.split(",")]
+        for line in data.strip().split("\n")
+    ]
     triangle: list[int]
 
-    for triangle in triangles:
-        ret += contains_origin(*triangle)
-
+    ret: int = sum(contains_origin(*triangle) for triangle in triangles)
     return ret
 
 

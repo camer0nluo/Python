@@ -5,7 +5,7 @@ def binomial_coefficient(n, r):
     >>> binomial_coefficient(10, 5)
     252
     """
-    C = [0 for i in range(r + 1)]
+    C = [0 for _ in range(r + 1)]
     # nc0 = 1
     C[0] = 1
     for i in range(1, n + 1):

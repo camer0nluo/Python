@@ -17,6 +17,7 @@ with your token::
 #!/usr/bin/env bash
 export USER_TOKEN=""
 """
+
 from __future__ import annotations
 
 import os
@@ -27,7 +28,7 @@ import requests
 BASE_URL = "https://api.github.com"
 
 # https://docs.github.com/en/free-pro-team@latest/rest/reference/users#get-the-authenticated-user
-AUTHENTICATED_USER_ENDPOINT = BASE_URL + "/user"
+AUTHENTICATED_USER_ENDPOINT = f"{BASE_URL}/user"
 
 # https://github.com/settings/tokens
 USER_TOKEN = os.environ.get("USER_TOKEN", "")
@@ -44,9 +45,8 @@ def fetch_github_info(auth_token: str) -> dict[Any, Any]:
     return requests.get(AUTHENTICATED_USER_ENDPOINT, headers=headers).json()
 
 
-if __name__ == "__main__":  # pragma: no cover
-    if USER_TOKEN:
-        for key, value in fetch_github_info(USER_TOKEN).items():
-            print(f"{key}: {value}")
-    else:
+if __name__ == "__main__":
+    if not USER_TOKEN:
         raise ValueError("'USER_TOKEN' field cannot be empty.")
+    for key, value in fetch_github_info(USER_TOKEN).items():
+        print(f"{key}: {value}")

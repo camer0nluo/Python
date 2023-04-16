@@ -36,12 +36,10 @@ class BezierCurve:
         [0.0, 1.0]
         """
         assert 0 <= t <= 1, "Time t must be between 0 and 1."
-        output_values: list[float] = []
-        for i in range(len(self.list_of_points)):
-            # basis function for each i
-            output_values.append(
-                comb(self.degree, i) * ((1 - t) ** (self.degree - i)) * (t**i)
-            )
+        output_values: list[float] = [
+            comb(self.degree, i) * ((1 - t) ** (self.degree - i)) * (t**i)
+            for i in range(len(self.list_of_points))
+        ]
         # the basis must sum up to 1 for it to produce a valid Bezier curve.
         assert round(sum(output_values), 5) == 1
         return output_values
@@ -97,7 +95,7 @@ class BezierCurve:
             to_plot_x,
             to_plot_y,
             color="blue",
-            label="Curve of Degree " + str(self.degree),
+            label=f"Curve of Degree {str(self.degree)}",
         )
         plt.scatter(x, y, color="red", label="Control Points")
         plt.legend()

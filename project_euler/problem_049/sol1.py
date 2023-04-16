@@ -47,11 +47,7 @@ def is_prime(number: int) -> bool:
     if number < 2:
         return False
 
-    for i in range(2, floor(sqrt(number)) + 1):
-        if number % i == 0:
-            return False
-
-    return True
+    return all(number % i != 0 for i in range(2, floor(sqrt(number)) + 1))
 
 
 def search(target: int, prime_list: list) -> bool:
@@ -128,10 +124,7 @@ def solution():
             if found:
                 break
 
-    answer = set()
-    for seq in passed:
-        answer.add("".join([str(i) for i in seq]))
-
+    answer = {"".join([str(i) for i in seq]) for seq in passed}
     return max(int(x) for x in answer)
 
 

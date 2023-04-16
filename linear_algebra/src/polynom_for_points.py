@@ -33,11 +33,11 @@ def points_to_polynomial(coordinates: list[list[int]]) -> str:
                 continue
             if d == coordinates[j][0]:
                 more_check += 1
-                solved = "x=" + str(coordinates[j][0])
+                solved = f"x={str(coordinates[j][0])}"
                 if more_check == len(coordinates) - 1:
                     check = 2
                     break
-                elif more_check > 0 and more_check != len(coordinates) - 1:
+                elif more_check > 0:
                     check = 3
                 else:
                     check = 1
@@ -48,11 +48,11 @@ def points_to_polynomial(coordinates: list[list[int]]) -> str:
     except Exception:
         check = 3
 
-    x = len(coordinates)
-
     if check == 1:
         count_of_line = 0
         matrix: list[list[float]] = []
+        x = len(coordinates)
+
         # put the x and x to the power values in a matrix
         while count_of_line < x:
             count_in_line = 0
@@ -102,8 +102,8 @@ def points_to_polynomial(coordinates: list[list[int]]) -> str:
         while count < x:
             remove_e: list[str] = solution[count].split("E")
             if len(remove_e) > 1:
-                solution[count] = remove_e[0] + "*10^" + remove_e[1]
-            solved += "x^" + str(x - (count + 1)) + "*" + str(solution[count])
+                solution[count] = f"{remove_e[0]}*10^{remove_e[1]}"
+            solved += f"x^{str(x - (count + 1))}*{str(solution[count])}"
             if count + 1 != x:
                 solved += "+"
             count += 1

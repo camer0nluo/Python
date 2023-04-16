@@ -90,37 +90,7 @@ class GraphAdjacencyList(Generic[T]):
         Vertices will be created if not found in graph
         """
 
-        if not self.directed:  # For undirected graphs
-            # if both source vertex and destination vertex are both present in the
-            # adjacency list, add destination vertex to source vertex list of adjacent
-            # vertices and add source vertex to destination vertex list of adjacent
-            # vertices.
-            if source_vertex in self.adj_list and destination_vertex in self.adj_list:
-                self.adj_list[source_vertex].append(destination_vertex)
-                self.adj_list[destination_vertex].append(source_vertex)
-            # if only source vertex is present in adjacency list, add destination vertex
-            # to source vertex list of adjacent vertices, then create a new vertex with
-            # destination vertex as key and assign a list containing the source vertex
-            # as it's first adjacent vertex.
-            elif source_vertex in self.adj_list:
-                self.adj_list[source_vertex].append(destination_vertex)
-                self.adj_list[destination_vertex] = [source_vertex]
-            # if only destination vertex is present in adjacency list, add source vertex
-            # to destination vertex list of adjacent vertices, then create a new vertex
-            # with source vertex as key and assign a list containing the source vertex
-            # as it's first adjacent vertex.
-            elif destination_vertex in self.adj_list:
-                self.adj_list[destination_vertex].append(source_vertex)
-                self.adj_list[source_vertex] = [destination_vertex]
-            # if both source vertex and destination vertex are not present in adjacency
-            # list, create a new vertex with source vertex as key and assign a list
-            # containing the destination vertex as it's first adjacent vertex also
-            # create a new vertex with destination vertex as key and assign a list
-            # containing the source vertex as it's first adjacent vertex.
-            else:
-                self.adj_list[source_vertex] = [destination_vertex]
-                self.adj_list[destination_vertex] = [source_vertex]
-        else:  # For directed graphs
+        if self.directed:  # For directed graphs
             # if both source vertex and destination vertex are present in adjacency
             # list, add destination vertex to source vertex list of adjacent vertices.
             if source_vertex in self.adj_list and destination_vertex in self.adj_list:
@@ -144,6 +114,18 @@ class GraphAdjacencyList(Generic[T]):
                 self.adj_list[source_vertex] = [destination_vertex]
                 self.adj_list[destination_vertex] = []
 
+        elif source_vertex in self.adj_list and destination_vertex in self.adj_list:
+            self.adj_list[source_vertex].append(destination_vertex)
+            self.adj_list[destination_vertex].append(source_vertex)
+        elif source_vertex in self.adj_list:
+            self.adj_list[source_vertex].append(destination_vertex)
+            self.adj_list[destination_vertex] = [source_vertex]
+        elif destination_vertex in self.adj_list:
+            self.adj_list[destination_vertex].append(source_vertex)
+            self.adj_list[source_vertex] = [destination_vertex]
+        else:
+            self.adj_list[source_vertex] = [destination_vertex]
+            self.adj_list[destination_vertex] = [source_vertex]
         return self
 
     def __repr__(self) -> str:

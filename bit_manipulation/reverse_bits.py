@@ -19,7 +19,7 @@ def get_reverse_bit_string(number: int) -> str:
             f"{type(number).__name__}"
         )
     bit_string = ""
-    for _ in range(0, 32):
+    for _ in range(32):
         bit_string += str(number % 2)
         number = number >> 1
     return bit_string

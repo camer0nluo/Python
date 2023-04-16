@@ -39,10 +39,10 @@ if __name__ == "__main__":
     # n - no of nodes, m - no of edges
     n, m = list(map(int, input().strip().split()))
 
-    graph: list[list[int]] = [[] for i in range(n)]  # graph
-    reversedGraph: list[list[int]] = [[] for i in range(n)]  # reversed graph
+    graph: list[list[int]] = [[] for _ in range(n)]
+    reversedGraph: list[list[int]] = [[] for _ in range(n)]
     # input graph data (edges)
-    for i in range(m):
+    for _ in range(m):
         u, v = list(map(int, input().strip().split()))
         graph[u].append(v)
         reversedGraph[v].append(u)

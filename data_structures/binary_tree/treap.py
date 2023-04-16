@@ -26,7 +26,7 @@ class Node:
             )
 
     def __str__(self) -> str:
-        value = str(self.value) + " "
+        value = f"{str(self.value)} "
         left = str(self.left or "")
         right = str(self.right or "")
         return value + left + right
@@ -39,26 +39,24 @@ def split(root: Node | None, value: int) -> tuple[Node | None, Node | None]:
     Left tree contains all values less than split value.
     Right tree contains all values greater or equal, than split value
     """
-    if root is None:  # None tree is split into 2 Nones
-        return None, None
-    elif root.value is None:
-        return None, None
-    else:
-        if value < root.value:
-            """
+    if root is not None and root.value is not None and value < root.value:
+        """
             Right tree's root will be current node.
             Now we split(with the same value) current node's left son
             Left tree: left part of that split
             Right tree's left son: right part of that split
             """
-            left, root.left = split(root.left, value)
-            return left, root
-        else:
-            """
+        left, root.left = split(root.left, value)
+        return left, root
+    elif root is not None and root.value is not None:
+        """
             Just symmetric to previous case
             """
-            root.right, right = split(root.right, value)
-            return root, right
+        root.right, right = split(root.right, value)
+        return root, right
+
+    else:  # None tree is split into 2 Nones
+        return None, None
 
 
 def merge(left: Node | None, right: Node | None) -> Node | None:
@@ -113,12 +111,11 @@ def inorder(root: Node | None) -> None:
     """
     Just recursive print of a tree
     """
-    if not root:  # None
+    if not root:
         return
-    else:
-        inorder(root.left)
-        print(root.value, end=",")
-        inorder(root.right)
+    inorder(root.left)
+    print(root.value, end=",")
+    inorder(root.right)
 
 
 def interactTreap(root: Node | None, args: str) -> Node | None:

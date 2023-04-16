@@ -18,11 +18,10 @@ class Onepad:
     @staticmethod
     def decrypt(cipher: list[int], key: list[int]) -> str:
         """Function to decrypt text using pseudo-random numbers."""
-        plain = []
-        for i in range(len(key)):
-            p = int((cipher[i] - (key[i]) ** 2) / key[i])
-            plain.append(chr(p))
-        return "".join([i for i in plain])
+        plain = [
+            chr(int((cipher[i] - (key[i]) ** 2) / key[i])) for i in range(len(key))
+        ]
+        return "".join(list(plain))
 
 
 if __name__ == "__main__":

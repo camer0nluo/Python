@@ -77,12 +77,12 @@ def gray_code_sequence_string(bit_count: int) -> list:
 
     # append 0 to first half of the smaller sequence generated
     for i in range(seq_len // 2):
-        generated_no = "0" + smaller_sequence[i]
+        generated_no = f"0{smaller_sequence[i]}"
         sequence.append(generated_no)
 
     # append 1 to second half ... start from the end of the list
     for i in reversed(range(seq_len // 2)):
-        generated_no = "1" + smaller_sequence[i]
+        generated_no = f"1{smaller_sequence[i]}"
         sequence.append(generated_no)
 
     return sequence

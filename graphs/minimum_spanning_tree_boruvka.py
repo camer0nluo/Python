@@ -72,8 +72,10 @@ class Graph:
         """
         output = []
         for tail in self.adjacency:
-            for head in self.adjacency[tail]:
-                output.append((tail, head, self.adjacency[head][tail]))
+            output.extend(
+                (tail, head, self.adjacency[head][tail])
+                for head in self.adjacency[tail]
+            )
         return output
 
     def get_vertices(self):
@@ -167,10 +169,7 @@ class Graph:
         union_find = Graph.UnionFind()
         mst_edges = []
         while num_components > 1:
-            cheap_edge = {}
-            for vertex in graph.get_vertices():
-                cheap_edge[vertex] = -1
-
+            cheap_edge = {vertex: -1 for vertex in graph.get_vertices()}
             edges = graph.get_edges()
             for edge in edges:
                 head, tail, weight = edge
@@ -185,12 +184,11 @@ class Graph:
 
                     if cheap_edge[set2] == -1 or cheap_edge[set2][2] > weight:
                         cheap_edge[set2] = [head, tail, weight]
-            for vertex in cheap_edge:
-                if cheap_edge[vertex] != -1:
+            for vertex, value in cheap_edge.items():
+                if value != -1:
                     head, tail, weight = cheap_edge[vertex]
                     if union_find.find(head) != union_find.find(tail):
                         union_find.union(head, tail)
                         mst_edges.append(cheap_edge[vertex])
                         num_components = num_components - 1
-        mst = Graph.build(edges=mst_edges)
-        return mst
+        return Graph.build(edges=mst_edges)

@@ -33,7 +33,7 @@ def jaro_winkler(str1: str, str2: str) -> float:
             right = int(min(i + limit + 1, len(_str2)))
             if l in _str2[left:right]:
                 matched.append(l)
-                _str2 = f"{_str2[0:_str2.index(l)]} {_str2[_str2.index(l) + 1:]}"
+                _str2 = f"{_str2[:_str2.index(l)]} {_str2[_str2.index(l) + 1:]}"
 
         return "".join(matched)
 
@@ -47,10 +47,8 @@ def jaro_winkler(str1: str, str2: str) -> float:
         len([(c1, c2) for c1, c2 in zip(matching_1, matching_2) if c1 != c2]) // 2
     )
 
-    if not match_count:
-        jaro = 0.0
-    else:
-        jaro = (
+    jaro = (
+        (
             1
             / 3
             * (
@@ -59,7 +57,9 @@ def jaro_winkler(str1: str, str2: str) -> float:
                 + (match_count - transpositions) / match_count
             )
         )
-
+        if match_count
+        else 0.0
+    )
     # common prefix up to 4 characters
     prefix_len = 0
     for c1, c2 in zip(str1[:4], str2[:4]):

@@ -53,13 +53,12 @@ class LRUCache(Generic[T]):
         Remove the least recently used key if the store is full.
         Update store to reflect recent access.
         """
-        if x not in self.key_reference:
-            if len(self.dq_store) == LRUCache._MAX_CAPACITY:
-                last_element = self.dq_store.pop()
-                self.key_reference.remove(last_element)
-        else:
+        if x in self.key_reference:
             self.dq_store.remove(x)
 
+        elif len(self.dq_store) == LRUCache._MAX_CAPACITY:
+            last_element = self.dq_store.pop()
+            self.key_reference.remove(last_element)
         self.dq_store.appendleft(x)
         self.key_reference.add(x)
 

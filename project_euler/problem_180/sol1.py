@@ -62,7 +62,7 @@ def is_sq(number: int) -> bool:
     True
     """
     sq: int = int(number**0.5)
-    return number == sq * sq
+    return number == sq**2
 
 
 def add_three(

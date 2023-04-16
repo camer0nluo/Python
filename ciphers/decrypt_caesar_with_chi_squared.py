@@ -127,9 +127,10 @@ def decrypt_caesar_with_chi_squared(
     alphabet_letters = cipher_alphabet or [chr(i) for i in range(97, 123)]
 
     # If the argument is None or the user provided an empty dictionary
-    if not frequencies_dict:
-        # Frequencies of letters in the english language (how much they show up)
-        frequencies = {
+    frequencies = (
+        frequencies_dict
+        if frequencies_dict
+        else {
             "a": 0.08497,
             "b": 0.01492,
             "c": 0.02202,
@@ -157,10 +158,7 @@ def decrypt_caesar_with_chi_squared(
             "y": 0.01994,
             "z": 0.00077,
         }
-    else:
-        # Custom frequencies dictionary
-        frequencies = frequencies_dict
-
+    )
     if not case_sensitive:
         ciphertext = ciphertext.lower()
 

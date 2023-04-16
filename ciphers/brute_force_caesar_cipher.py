@@ -34,7 +34,7 @@ def decrypt(message: str) -> None:
         for symbol in message:
             if symbol in LETTERS:
                 num = LETTERS.find(symbol)
-                num = num - key
+                num -= key
                 if num < 0:
                     num = num + len(LETTERS)
                 translated = translated + LETTERS[num]

@@ -36,10 +36,10 @@ class BoyerMooreSearch:
             -1 (int): if char is not found in pattern
         """
 
-        for i in range(self.patLen - 1, -1, -1):
-            if char == self.pattern[i]:
-                return i
-        return -1
+        return next(
+            (i for i in range(self.patLen - 1, -1, -1) if char == self.pattern[i]),
+            -1,
+        )
 
     def mismatch_in_text(self, currentPos: int) -> int:
         """
@@ -54,10 +54,14 @@ class BoyerMooreSearch:
             -1 (int): if there is no mismatch between pattern and text block
         """
 
-        for i in range(self.patLen - 1, -1, -1):
-            if self.pattern[i] != self.text[currentPos + i]:
-                return currentPos + i
-        return -1
+        return next(
+            (
+                currentPos + i
+                for i in range(self.patLen - 1, -1, -1)
+                if self.pattern[i] != self.text[currentPos + i]
+            ),
+            -1,
+        )
 
     def bad_character_heuristic(self) -> list[int]:
         # searches pattern in text and returns index positions

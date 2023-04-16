@@ -26,16 +26,12 @@ class LinkedList:
         self.size += 1
 
     def remove(self) -> Any:
-        # Switched 'self.is_empty()' to 'self.head is None'
-        # because mypy was considering the possibility that 'self.head'
-        # can be None in below else part and giving error
         if self.head is None:
             return None
-        else:
-            item = self.head.item
-            self.head = self.head.next
-            self.size -= 1
-            return item
+        item = self.head.item
+        self.head = self.head.next
+        self.size -= 1
+        return item
 
     def is_empty(self) -> bool:
         return self.head is None
@@ -51,17 +47,14 @@ class LinkedList:
         """
         if not self.is_empty:
             return ""
-        else:
-            iterate = self.head
-            item_str = ""
-            item_list: list[str] = []
-            while iterate:
-                item_list.append(str(iterate.item))
-                iterate = iterate.next
+        iterate = self.head
+        item_str = ""
+        item_list: list[str] = []
+        while iterate:
+            item_list.append(str(iterate.item))
+            iterate = iterate.next
 
-            item_str = " --> ".join(item_list)
-
-            return item_str
+        return " --> ".join(item_list)
 
     def __len__(self) -> int:
         """

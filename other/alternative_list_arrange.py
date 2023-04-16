@@ -15,11 +15,7 @@ def alternative_list_arrange(first_input_list: list, second_input_list: list) ->
     """
     first_input_list_length: int = len(first_input_list)
     second_input_list_length: int = len(second_input_list)
-    abs_length: int = (
-        first_input_list_length
-        if first_input_list_length > second_input_list_length
-        else second_input_list_length
-    )
+    abs_length: int = max(first_input_list_length, second_input_list_length)
     output_result_list: list = []
     for char_count in range(abs_length):
         if char_count < first_input_list_length:

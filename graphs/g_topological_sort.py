@@ -14,7 +14,7 @@ clothes = {
 
 graph = [[1, 4], [2, 4], [3], [], [], [4], [2, 7], [3], []]
 
-visited = [0 for x in range(len(graph))]
+visited = [0 for _ in range(len(graph))]
 stack = []
 
 

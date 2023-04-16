@@ -7,7 +7,7 @@ def findMin(arr):
     n = len(arr)
     s = sum(arr)
 
-    dp = [[False for x in range(s + 1)] for y in range(n + 1)]
+    dp = [[False for _ in range(s + 1)] for _ in range(n + 1)]
 
     for i in range(1, n + 1):
         dp[i][0] = True

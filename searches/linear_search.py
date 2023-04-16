@@ -27,10 +27,9 @@ def linear_search(sequence: list, target: int) -> int:
     >>> linear_search([0, 5, 7, 10, 15], 6)
     -1
     """
-    for index, item in enumerate(sequence):
-        if item == target:
-            return index
-    return -1
+    return next(
+        (index for index, item in enumerate(sequence) if item == target), -1
+    )
 
 
 def rec_linear_search(sequence: list, low: int, high: int, target: int) -> int:

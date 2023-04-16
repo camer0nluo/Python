@@ -54,7 +54,7 @@ def solution(n: int = 4000000) -> int:
     """
 
     try:
-        n = int(n)
+        n = n
     except (TypeError, ValueError):
         raise TypeError("Parameter n must be int or castable to int.")
     if n <= 0:
