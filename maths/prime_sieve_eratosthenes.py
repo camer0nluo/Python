@@ -24,12 +24,12 @@ def prime_sieve_eratosthenes(num):
     2,3,5,7,11,13,17,19,
     """
 
-    primes = [True for i in range(num + 1)]
+    primes = [True for _ in range(num + 1)]
     p = 2
 
-    while p * p <= num:
+    while p**2 <= num:
         if primes[p]:
-            for i in range(p * p, num + 1, p):
+            for i in range(p**2, num + 1, p):
                 primes[i] = False
         p += 1
 

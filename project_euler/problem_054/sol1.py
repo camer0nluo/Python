@@ -209,23 +209,26 @@ class PokerHand:
         pair1 = PokerHand._CARD_NAME[self._first_pair]
         pair2 = PokerHand._CARD_NAME[self._second_pair]
         if self._hand_type in [22, 19, 18]:
-            return name + f", {high}-high"
+            return f"{name}, {high}-high"
         elif self._hand_type in [21, 17, 15]:
-            return name + f", {pair1}s"
+            return f"{name}, {pair1}s"
         elif self._hand_type in [20, 16]:
             join = "over" if self._hand_type == 20 else "and"
-            return name + f", {pair1}s {join} {pair2}s"
+            return f"{name}, {pair1}s {join} {pair2}s"
         elif self._hand_type == 23:
             return name
         else:
-            return name + f", {high}"
+            return f"{name}, {high}"
 
     def _compare_cards(self, other: PokerHand) -> str:
-        # Enumerate gives us the index as well as the element of a list
-        for index, card_value in enumerate(self._card_values):
-            if card_value != other._card_values[index]:
-                return "Win" if card_value > other._card_values[index] else "Loss"
-        return "Tie"
+        return next(
+            (
+                "Win" if card_value > other._card_values[index] else "Loss"
+                for index, card_value in enumerate(self._card_values)
+                if card_value != other._card_values[index]
+            ),
+            "Tie",
+        )
 
     def _get_hand_type(self) -> int:
         # Number representing the type of hand internally:
@@ -268,10 +271,9 @@ class PokerHand:
         return False
 
     def _is_straight(self) -> bool:
-        for i in range(4):
-            if self._card_values[i] - self._card_values[i + 1] != 1:
-                return False
-        return True
+        return all(
+            self._card_values[i] - self._card_values[i + 1] == 1 for i in range(4)
+        )
 
     def _is_same_kind(self) -> int:
         # Kind Values for internal use:
@@ -292,13 +294,15 @@ class PokerHand:
                 if not val1:
                     val1 = self._card_values[i]
                     kind += 1
-                elif val1 == self._card_values[i]:
+                elif (
+                    val1 == self._card_values[i]
+                    or val2
+                    and val2 == self._card_values[i]
+                ):
                     kind += 2
                 elif not val2:
                     val2 = self._card_values[i]
                     kind += 1
-                elif val2 == self._card_values[i]:
-                    kind += 2
         # For consistency in hand type (look at note in _get_hand_type function)
         kind = kind + 2 if kind in [4, 5] else kind
         # first meaning first pair to compare in 'compare_with'
@@ -352,9 +356,7 @@ class PokerHand:
         return NotImplemented
 
     def __ge__(self, other):
-        if isinstance(other, PokerHand):
-            return not self < other
-        return NotImplemented
+        return not self < other if isinstance(other, PokerHand) else NotImplemented
 
     def __hash__(self):
         return object.__hash__(self)

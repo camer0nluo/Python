@@ -80,17 +80,14 @@ class FFT:
 
     # Discrete fourier transform of A and B
     def __DFT(self, which):
-        if which == "A":
-            dft = [[x] for x in self.polyA]
-        else:
-            dft = [[x] for x in self.polyB]
+        dft = [[x] for x in self.polyA] if which == "A" else [[x] for x in self.polyB]
         # Corner case
         if len(dft) <= 1:
             return dft[0]
         #
         next_ncol = self.C_max_length // 2
         while next_ncol > 0:
-            new_dft = [[] for i in range(next_ncol)]
+            new_dft = [[] for _ in range(next_ncol)]
             root = self.root**next_ncol
 
             # First half of next step

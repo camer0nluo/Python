@@ -68,15 +68,11 @@ def factorial_sum(a: int) -> int:
     """
     if a in factorial_sum_cache:
         return factorial_sum_cache[a]
-    # Prepare a variable to hold the computation
-    fact_sum = 0
-
     """ Convert a in string to iterate on its digits
         convert the digit back into an int
         and add its factorial to fact_sum.
     """
-    for i in str(a):
-        fact_sum += factorial(int(i))
+    fact_sum = sum(factorial(int(i)) for i in str(a))
     factorial_sum_cache[a] = fact_sum
     return fact_sum
 

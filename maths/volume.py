@@ -204,18 +204,18 @@ def vol_conical_frustum(height: float, radius_1: float, radius_2: float):
 def main():
     """Print the Results of Various Volume Calculations."""
     print("Volumes:")
-    print("Cube: " + str(vol_cube(2)))  # = 8
-    print("Cuboid: " + str(vol_cuboid(2, 2, 2)))  # = 8
-    print("Cone: " + str(vol_cone(2, 2)))  # ~= 1.33
-    print("Right Circular Cone: " + str(vol_right_circ_cone(2, 2)))  # ~= 8.38
-    print("Prism: " + str(vol_prism(2, 2)))  # = 4
-    print("Pyramid: " + str(vol_pyramid(2, 2)))  # ~= 1.33
-    print("Sphere: " + str(vol_sphere(2)))  # ~= 33.5
-    print("Hemisphere: " + str(vol_hemisphere(2)))  # ~= 16.75
-    print("Circular Cylinder: " + str(vol_circular_cylinder(2, 2)))  # ~= 25.1
-    print("Conical Frustum: " + str(vol_conical_frustum(2, 2, 4)))  # ~= 58.6
-    print("Spherical cap: " + str(vol_spherical_cap(1, 2)))  # ~= 5.24
-    print("Spheres intersetion: " + str(vol_spheres_intersect(2, 2, 1)))  # ~= 21.21
+    print(f"Cube: {str(vol_cube(2))}")
+    print(f"Cuboid: {str(vol_cuboid(2, 2, 2))}")
+    print(f"Cone: {str(vol_cone(2, 2))}")
+    print(f"Right Circular Cone: {str(vol_right_circ_cone(2, 2))}")
+    print(f"Prism: {str(vol_prism(2, 2))}")
+    print(f"Pyramid: {str(vol_pyramid(2, 2))}")
+    print(f"Sphere: {str(vol_sphere(2))}")
+    print(f"Hemisphere: {str(vol_hemisphere(2))}")
+    print(f"Circular Cylinder: {str(vol_circular_cylinder(2, 2))}")
+    print(f"Conical Frustum: {str(vol_conical_frustum(2, 2, 4))}")
+    print(f"Spherical cap: {str(vol_spherical_cap(1, 2))}")
+    print(f"Spheres intersetion: {str(vol_spheres_intersect(2, 2, 1))}")
 
 
 if __name__ == "__main__":

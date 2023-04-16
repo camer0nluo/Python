@@ -40,15 +40,13 @@ def decompress_data(data_bits: str) -> str:
 
         last_match_id = lexicon[curr_string]
         result += last_match_id
-        lexicon[curr_string] = last_match_id + "0"
+        lexicon[curr_string] = f"{last_match_id}0"
 
         if math.log2(index).is_integer():
-            newLex = {}
-            for curr_key in list(lexicon):
-                newLex["0" + curr_key] = lexicon.pop(curr_key)
+            newLex = {f"0{curr_key}": lexicon.pop(curr_key) for curr_key in list(lexicon)}
             lexicon = newLex
 
-        lexicon[bin(index)[2:]] = last_match_id + "1"
+        lexicon[bin(index)[2:]] = f"{last_match_id}1"
         index += 1
         curr_string = ""
     return result
@@ -93,8 +91,7 @@ def remove_prefix(data_bits: str) -> str:
         counter += 1
 
     data_bits = data_bits[counter:]
-    data_bits = data_bits[counter + 1 :]
-    return data_bits
+    return data_bits[counter + 1 :]
 
 
 def compress(source_path: str, destination_path: str) -> None:

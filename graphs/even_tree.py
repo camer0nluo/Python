@@ -18,12 +18,8 @@ from collections import defaultdict
 
 def dfs(start: int) -> int:
     """DFS traversal"""
-    # pylint: disable=redefined-outer-name
-    ret = 1
     visited[start] = True
-    for v in tree[start]:
-        if v not in visited:
-            ret += dfs(v)
+    ret = 1 + sum(dfs(v) for v in tree[start] if v not in visited)
     if ret % 2 == 0:
         cuts.append(start)
     return ret

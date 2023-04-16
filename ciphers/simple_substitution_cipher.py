@@ -22,11 +22,8 @@ def main() -> None:
 
 
 def checkValidKey(key: str) -> None:
-    keyList = list(key)
-    lettersList = list(LETTERS)
-    keyList.sort()
-    lettersList.sort()
-
+    keyList = sorted(key)
+    lettersList = sorted(LETTERS)
     if keyList != lettersList:
         sys.exit("Error in the key or symbol set.")
 

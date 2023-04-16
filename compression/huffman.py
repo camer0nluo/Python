@@ -28,10 +28,10 @@ def parse_file(file_path: str) -> list[Letter]:
     chars: dict[str, int] = {}
     with open(file_path) as f:
         while True:
-            c = f.read(1)
-            if not c:
+            if c := f.read(1):
+                chars[c] = chars[c] + 1 if c in chars else 1
+            else:
                 break
-            chars[c] = chars[c] + 1 if c in chars.keys() else 1
     return sorted((Letter(c, f) for c, f in chars.items()), key=lambda l: l.freq)
 
 
@@ -61,8 +61,8 @@ def traverse_tree(root: Letter | TreeNode, bitstring: str) -> list[Letter]:
         return [root]
     treenode: TreeNode = root  # type: ignore
     letters = []
-    letters += traverse_tree(treenode.left, bitstring + "0")
-    letters += traverse_tree(treenode.right, bitstring + "1")
+    letters += traverse_tree(treenode.left, f"{bitstring}0")
+    letters += traverse_tree(treenode.right, f"{bitstring}1")
     return letters
 
 
@@ -80,10 +80,10 @@ def huffman(file_path: str) -> None:
     print(f"Huffman Coding  of {file_path}: ")
     with open(file_path) as f:
         while True:
-            c = f.read(1)
-            if not c:
+            if c := f.read(1):
+                print(letters[c], end=" ")
+            else:
                 break
-            print(letters[c], end=" ")
     print()
 
 

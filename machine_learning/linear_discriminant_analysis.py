@@ -141,10 +141,9 @@ def calculate_variance(items: list, means: list, total_count: int) -> float:
     # iterate over number of elements in items
     for i in range(len(items)):
         # for loop iterates over number of elements in inner layer of items
-        for j in range(len(items[i])):
-            # appending squared differences to 'squared_diff' list
-            squared_diff.append((items[i][j] - means[i]) ** 2)
-
+        squared_diff.extend(
+            (items[i][j] - means[i]) ** 2 for j in range(len(items[i]))
+        )
     # one divided by (the number of all instances - number of classes) multiplied by
     # sum of all squared differences
     n_classes = len(means)  # Number of classes in dataset
@@ -197,18 +196,15 @@ def predict_y_values(
     # each class
     results = []
     # for loop iterates over number of elements in list
-    for i in range(len(x_items)):
+    for x_item in x_items:
         # for loop iterates over number of inner items of each element
-        for j in range(len(x_items[i])):
-            temp = []  # to store all discriminant values of each item as a list
-            # for loop iterates over number of classes we have in our dataset
-            for k in range(len(x_items)):
-                # appending values of discriminants for each class to 'temp' list
-                temp.append(
-                    x_items[i][j] * (means[k] / variance)
-                    - (means[k] ** 2 / (2 * variance))
-                    + log(probabilities[k])
-                )
+        for j in range(len(x_item)):
+            temp = [
+                x_item[j] * (means[k] / variance)
+                - means[k] ** 2 / (2 * variance)
+                + log(probabilities[k])
+                for k in range(len(x_items))
+            ]
             # appending discriminant values of each item to 'results' list
             results.append(temp)
 
@@ -241,7 +237,7 @@ def accuracy(actual_y: list, predicted_y: list) -> float:
     """
     # iterate over one element of each list at a time (zip mode)
     # prediction is correct if actual Y value equals to predicted Y value
-    correct = sum(1 for i, j in zip(actual_y, predicted_y) if i == j)
+    correct = sum(i == j for i, j in zip(actual_y, predicted_y))
     # percentage of accuracy equals to number of correct predictions divided by number
     # of all data and multiplied by 100
     return (correct / len(actual_y)) * 100
@@ -272,9 +268,8 @@ def valid_input(
             user_input = input_type(input(input_msg).strip() or default)
             if condition(user_input):
                 return user_input
-            else:
-                print(f"{user_input}: {err_msg}")
-                continue
+            print(f"{user_input}: {err_msg}")
+            continue
         except ValueError:
             print(
                 f"{user_input}: Incorrect input type, expected {input_type.__name__!r}"

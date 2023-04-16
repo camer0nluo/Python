@@ -5,10 +5,7 @@ def apply_table(inp, table):
     >>> apply_table("0123456789", list(range(9, -1, -1)))
     '8765432109'
     """
-    res = ""
-    for i in table:
-        res += inp[i - 1]
-    return res
+    return "".join(inp[i - 1] for i in table)
 
 
 def left_shift(data):
@@ -24,18 +21,12 @@ def XOR(a, b):
     >>> XOR("01010101", "00001111")
     '01011010'
     """
-    res = ""
-    for i in range(len(a)):
-        if a[i] == b[i]:
-            res += "0"
-        else:
-            res += "1"
-    return res
+    return "".join("0" if a[i] == b[i] else "1" for i in range(len(a)))
 
 
 def apply_sbox(s, data):
-    row = int("0b" + data[0] + data[-1], 2)
-    col = int("0b" + data[1:3], 2)
+    row = int(f"0b{data[0]}{data[-1]}", 2)
+    col = int(f"0b{data[1:3]}", 2)
     return bin(s[row][col])[2:]
 
 

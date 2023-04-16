@@ -24,7 +24,7 @@ def solution(n: int = 20) -> int:
     >>> solution(1)
     2
     """
-    n = 2 * n  # middle entry of odd rows starting at row 3 is the solution for n = 1,
+    n *= 2
     # 2, 3,...
     k = n // 2
 

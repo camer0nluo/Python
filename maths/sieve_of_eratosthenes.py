@@ -38,25 +38,19 @@ def prime_sieve(num: int) -> list[int]:
 
     sieve = [True] * (num + 1)
     prime = []
-    start = 2
     end = int(math.sqrt(num))
 
-    while start <= end:
+    for start in range(2, end + 1):
         # If start is a prime
         if sieve[start] is True:
             prime.append(start)
 
             # Set multiples of start be False
-            for i in range(start * start, num + 1, start):
+            for i in range(start**2, num + 1, start):
                 if sieve[i] is True:
                     sieve[i] = False
 
-        start += 1
-
-    for j in range(end + 1, num + 1):
-        if sieve[j] is True:
-            prime.append(j)
-
+    prime.extend(j for j in range(end + 1, num + 1) if sieve[j] is True)
     return prime
 
 

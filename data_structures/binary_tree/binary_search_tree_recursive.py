@@ -71,13 +71,12 @@ class BinarySearchTree:
     def _put(self, node: Node | None, label: int, parent: Node | None = None) -> Node:
         if node is None:
             node = Node(label, parent)
+        elif label < node.label:
+            node.left = self._put(node.left, label, node)
+        elif label > node.label:
+            node.right = self._put(node.right, label, node)
         else:
-            if label < node.label:
-                node.left = self._put(node.left, label, node)
-            elif label > node.label:
-                node.right = self._put(node.right, label, node)
-            else:
-                raise Exception(f"Node with label {label} already exists")
+            raise Exception(f"Node with label {label} already exists")
 
         return node
 
@@ -101,11 +100,10 @@ class BinarySearchTree:
     def _search(self, node: Node | None, label: int) -> Node:
         if node is None:
             raise Exception(f"Node with label {label} does not exist")
-        else:
-            if label < node.label:
-                node = self._search(node.left, label)
-            elif label > node.label:
-                node = self._search(node.right, label)
+        if label < node.label:
+            node = self._search(node.left, label)
+        elif label > node.label:
+            node = self._search(node.right, label)
 
         return node
 
@@ -135,7 +133,7 @@ class BinarySearchTree:
             self._reassign_nodes(node, lowest_node)
         elif not node.right and node.left:
             self._reassign_nodes(node, node.left)
-        elif node.right and not node.left:
+        elif node.right:
             self._reassign_nodes(node, node.right)
         else:
             self._reassign_nodes(node, None)
@@ -157,8 +155,7 @@ class BinarySearchTree:
             lowest_node = self._get_lowest_node(node.left)
         else:
             lowest_node = node
-            self._reassign_nodes(node, node.right)
-
+            self._reassign_nodes(lowest_node, lowest_node.right)
         return lowest_node
 
     def exists(self, label: int) -> bool:

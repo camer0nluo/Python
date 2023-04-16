@@ -34,11 +34,8 @@ def solution():
     >>> solution()
     70600674
     """
-    with open(os.path.dirname(__file__) + "/grid.txt") as f:
-        l = []  # noqa: E741
-        for i in range(20):
-            l.append([int(x) for x in f.readline().split()])
-
+    with open(f"{os.path.dirname(__file__)}/grid.txt") as f:
+        l = [[int(x) for x in f.readline().split()] for _ in range(20)]
         maximum = 0
 
         # right

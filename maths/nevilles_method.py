@@ -36,7 +36,7 @@ def neville_interpolate(x_points: list, y_points: list, x0: int) -> list:
     TypeError: unsupported operand type(s) for -: 'str' and 'int'
     """
     n = len(x_points)
-    q = [[0] * n for i in range(n)]
+    q = [[0] * n for _ in range(n)]
     for i in range(n):
         q[i][1] = y_points[i]
 

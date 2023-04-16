@@ -14,7 +14,7 @@ def abs_min(x: list[int]) -> int:
         ...
     ValueError: abs_min() arg is an empty sequence
     """
-    if len(x) == 0:
+    if not x:
         raise ValueError("abs_min() arg is an empty sequence")
     j = x[0]
     for i in x:

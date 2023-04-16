@@ -46,7 +46,7 @@ def iterate(initial_vectors: list[numpy.ndarray], steps: int) -> list[numpy.ndar
 0.28867513]), array([0.66666667, 0.        ]), array([1, 0])]
     """
     vectors = initial_vectors
-    for i in range(steps):
+    for _ in range(steps):
         vectors = iteration_step(vectors)
     return vectors
 
@@ -66,11 +66,15 @@ def iteration_step(vectors: list[numpy.ndarray]) -> list[numpy.ndarray]:
         end_vector = vectors[i + 1]
         new_vectors.append(start_vector)
         difference_vector = end_vector - start_vector
-        new_vectors.append(start_vector + difference_vector / 3)
-        new_vectors.append(
-            start_vector + difference_vector / 3 + rotate(difference_vector / 3, 60)
+        new_vectors.extend(
+            (
+                start_vector + difference_vector / 3,
+                start_vector
+                + difference_vector / 3
+                + rotate(difference_vector / 3, 60),
+                start_vector + difference_vector * 2 / 3,
+            )
         )
-        new_vectors.append(start_vector + difference_vector * 2 / 3)
     new_vectors.append(vectors[-1])
     return new_vectors
 

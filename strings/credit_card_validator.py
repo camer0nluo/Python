@@ -32,9 +32,7 @@ def luhn_validation(credit_card_number: str) -> bool:
     total = 0
     half_len = len(cc_number) - 2
     for i in range(half_len, -1, -2):
-        #  double the value of every second digit
-        digit = int(cc_number[i])
-        digit *= 2
+        digit = int(cc_number[i]) * 2
         # If doubling of a number results in a two digit number
         # i.e greater than 9(e.g., 6 × 2 = 12),
         # then add the digits of the product (e.g., 12: 1 + 2 = 3, 15: 1 + 5 = 6),

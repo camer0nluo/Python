@@ -18,10 +18,7 @@ def compare_string(string1: str, string2: str) -> str:
         if list1[i] != list2[i]:
             count += 1
             list1[i] = "_"
-    if count > 1:
-        return "X"
-    else:
-        return "".join(list1)
+    return "X" if count > 1 else "".join(list1)
 
 
 def check(binary: list[str]) -> list[str]:
@@ -40,10 +37,8 @@ def check(binary: list[str]) -> list[str]:
                     check1[i] = "*"
                     check1[j] = "*"
                     temp.append(k)
-        for i in range(len(binary)):
-            if check1[i] == "$":
-                pi.append(binary[i])
-        if len(temp) == 0:
+        pi.extend(binary[i] for i in range(len(binary)) if check1[i] == "$")
+        if not temp:
             return pi
         binary = list(set(temp))
 
@@ -56,7 +51,7 @@ def decimal_to_binary(no_of_variable: int, minterms: Sequence[float]) -> list[st
     temp = []
     for minterm in minterms:
         string = ""
-        for i in range(no_of_variable):
+        for _ in range(no_of_variable):
             string = str(minterm % 2) + string
             minterm //= 2
         temp.append(string)
@@ -73,10 +68,7 @@ def is_for_table(string1: str, string2: str, count: int) -> bool:
     """
     list1 = list(string1)
     list2 = list(string2)
-    count_n = 0
-    for i in range(len(list1)):
-        if list1[i] != list2[i]:
-            count_n += 1
+    count_n = sum(list1[i] != list2[i] for i in range(len(list1)))
     return count_n == count
 
 
@@ -103,8 +95,8 @@ def selection(chart: list[list[int]], prime_implicants: list[str]) -> list[str]:
         if select[i] == 1:
             for j in range(len(chart[0])):
                 if chart[i][j] == 1:
-                    for k in range(len(chart)):
-                        chart[k][j] = 0
+                    for item in chart:
+                        item[j] = 0
             temp.append(prime_implicants[i])
     while True:
         max_n = 0
@@ -123,8 +115,8 @@ def selection(chart: list[list[int]], prime_implicants: list[str]) -> list[str]:
 
         for i in range(len(chart[0])):
             if chart[rem][i] == 1:
-                for j in range(len(chart)):
-                    chart[j][i] = 0
+                for item_ in chart:
+                    item_[i] = 0
 
 
 def prime_implicant_chart(
@@ -134,7 +126,7 @@ def prime_implicant_chart(
     >>> prime_implicant_chart(['0.00.01.5'],['0.00.01.5'])
     [[1]]
     """
-    chart = [[0 for x in range(len(binary))] for x in range(len(prime_implicants))]
+    chart = [[0 for _ in range(len(binary))] for _ in range(len(prime_implicants))]
     for i in range(len(prime_implicants)):
         count = prime_implicants[i].count("_")
         for j in range(len(binary)):

@@ -7,7 +7,7 @@ def isSumSubset(arr, arrLen, requiredSum):
     """
     # a subset value says 1 if that subset sum can be formed else 0
     # initially no subsets can be formed hence False/0
-    subset = [[False for i in range(requiredSum + 1)] for i in range(arrLen + 1)]
+    subset = [[False for _ in range(requiredSum + 1)] for _ in range(arrLen + 1)]
 
     # for each arr value, a sum of zero(0) can be formed by not taking any element
     # hence True/1

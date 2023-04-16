@@ -36,14 +36,13 @@ def stable_matching(
         rec_preference = recipient_pref[recipient]
         prev_donor = rec_record[recipient]
 
-        if prev_donor != -1:
-            if rec_preference.index(prev_donor) > rec_preference.index(donor):
-                rec_record[recipient] = donor
-                donor_record[donor] = recipient
-                unmatched_donors.append(prev_donor)
-                unmatched_donors.remove(donor)
-        else:
+        if prev_donor == -1:
             rec_record[recipient] = donor
             donor_record[donor] = recipient
+            unmatched_donors.remove(donor)
+        elif rec_preference.index(prev_donor) > rec_preference.index(donor):
+            rec_record[recipient] = donor
+            donor_record[donor] = recipient
+            unmatched_donors.append(prev_donor)
             unmatched_donors.remove(donor)
     return donor_record

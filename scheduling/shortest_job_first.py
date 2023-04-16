@@ -36,12 +36,14 @@ def calculate_waitingtime(
     # Process until all processes are completed
     while complete != no_of_processes:
         for j in range(no_of_processes):
-            if arrival_time[j] <= increment_time:
-                if remaining_time[j] > 0:
-                    if remaining_time[j] < minm:
-                        minm = remaining_time[j]
-                        short = j
-                        check = True
+            if (
+                arrival_time[j] <= increment_time
+                and remaining_time[j] > 0
+                and remaining_time[j] < minm
+            ):
+                minm = remaining_time[j]
+                short = j
+                check = True
 
         if not check:
             increment_time += 1
@@ -63,9 +65,7 @@ def calculate_waitingtime(
             finar = finish_time - arrival_time[short]
             waiting_time[short] = finar - burst_time[short]
 
-            if waiting_time[short] < 0:
-                waiting_time[short] = 0
-
+            waiting_time[short] = max(waiting_time[short], 0)
         # Increment time
         increment_time += 1
     return waiting_time
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     processes = list(range(1, no_of_processes + 1))
 
     for i in range(no_of_processes):
-        print("Enter the arrival time and burst time for process:--" + str(i + 1))
+        print(f"Enter the arrival time and burst time for process:--{str(i + 1)}")
         arrival_time[i], burst_time[i] = map(int, input().split())
 
     waiting_time = calculate_waitingtime(arrival_time, burst_time, no_of_processes)
@@ -133,8 +133,7 @@ if __name__ == "__main__":
     wt = waiting_time
     turn_around_time = calculate_turnaroundtime(bt, n, wt)
 
-    calculate_average_times(waiting_time, turn_around_time, no_of_processes)
-
+    calculate_average_times(waiting_time, turn_around_time, n)
     fcfs = pd.DataFrame(
         list(zip(processes, burst_time, arrival_time, waiting_time, turn_around_time)),
         columns=[

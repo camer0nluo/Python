@@ -191,33 +191,33 @@ class SegmentTree:
         if node.start == i and node.end == j:
             return node.val
 
-        if i <= node.mid:
-            if j <= node.mid:
-                # range in left child tree
-                return self._query_range(node.left, i, j)
-            else:
-                # range in left child tree and right child tree
-                return self.fn(
-                    self._query_range(node.left, i, node.mid),
-                    self._query_range(node.right, node.mid + 1, j),
-                )
-        else:
+        if i > node.mid:
             # range in right child tree
             return self._query_range(node.right, i, j)
+        if j <= node.mid:
+            # range in left child tree
+            return self._query_range(node.left, i, j)
+        else:
+            # range in left child tree and right child tree
+            return self.fn(
+                self._query_range(node.left, i, node.mid),
+                self._query_range(node.right, node.mid + 1, j),
+            )
 
     def traverse(self):
-        if self.root is not None:
-            queue = Queue()
-            queue.put(self.root)
-            while not queue.empty():
-                node = queue.get()
-                yield node
+        if self.root is None:
+            return
+        queue = Queue()
+        queue.put(self.root)
+        while not queue.empty():
+            node = queue.get()
+            yield node
 
-                if node.left is not None:
-                    queue.put(node.left)
+            if node.left is not None:
+                queue.put(node.left)
 
-                if node.right is not None:
-                    queue.put(node.right)
+            if node.right is not None:
+                queue.put(node.right)
 
 
 if __name__ == "__main__":

@@ -32,10 +32,12 @@ def all_solution_file_paths() -> list[pathlib.Path]:
     for problem_dir_path in PROJECT_EULER_DIR_PATH.iterdir():
         if problem_dir_path.is_file() or problem_dir_path.name.startswith("_"):
             continue
-        for file_path in problem_dir_path.iterdir():
-            if file_path.suffix != ".py" or file_path.name.startswith(("_", "test")):
-                continue
-            solution_file_paths.append(file_path)
+        solution_file_paths.extend(
+            file_path
+            for file_path in problem_dir_path.iterdir()
+            if file_path.suffix == ".py"
+            and not file_path.name.startswith(("_", "test"))
+        )
     return solution_file_paths
 
 

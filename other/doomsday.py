@@ -36,10 +36,8 @@ def get_week_day(year: int, month: int, day: int) -> str:
     assert 1 <= month <= 12, "month should be between 1 to 12"
     assert 1 <= day <= 31, "day should be between 1 to 31"
 
-    # Doomsday algorithm:
-    century = year // 100
+    century, centurian = divmod(year, 100)
     century_anchor = (5 * (century % 4) + 2) % 7
-    centurian = year % 100
     centurian_m = centurian % 12
     dooms_day = (
         (centurian // 12) + centurian_m + (centurian_m // 4) + century_anchor

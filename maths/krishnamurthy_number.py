@@ -20,7 +20,7 @@ def factorial(digit: int) -> int:
     120
     """
 
-    return 1 if digit in (0, 1) else (digit * factorial(digit - 1))
+    return 1 if digit in {0, 1} else digit * factorial(digit - 1)
 
 
 def krishnamurthy(number: int) -> bool:

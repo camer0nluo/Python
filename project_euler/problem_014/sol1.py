@@ -48,11 +48,9 @@ def solution(n: int = 1000000) -> int:
                 break
             if number % 2 == 0:
                 number //= 2
-                counter += 1
             else:
                 number = (3 * number) + 1
-                counter += 1
-
+            counter += 1
         if input1 not in counters:
             counters[input1] = counter
 

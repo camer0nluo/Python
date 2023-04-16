@@ -137,11 +137,9 @@ def hill_climbing(
                 if change > max_change and change > 0:
                     max_change = change
                     next_state = neighbor
-            else:  # finding min
-                # to direction with greatest descent
-                if change < min_change and change < 0:
-                    min_change = change
-                    next_state = neighbor
+            elif change < min_change and change < 0:
+                min_change = change
+                next_state = neighbor
         if next_state is not None:
             # we found at least one neighbor which improved the current state
             current_state = next_state

@@ -41,11 +41,9 @@ def local_weight(
             [0.08272556]])
     """
     weight = weighted_matrix(point, training_data_x, bandwidth)
-    W = (training_data_x.T * (weight * training_data_x)).I * (
+    return (training_data_x.T * (weight * training_data_x)).I * (
         training_data_x.T * weight * training_data_y.T
     )
-
-    return W
 
 
 def local_weight_regression(
@@ -98,8 +96,7 @@ def get_preds(training_data_x: np.mat, mcol_b: np.mat, tau: float) -> np.ndarray
     ...                     [24.59,25.69]]),np.mat([[1.01, 1.66, 3.5]]), 0.6)
     array([1.07173261, 1.65970737, 3.50160179])
     """
-    ypred = local_weight_regression(training_data_x, mcol_b, tau)
-    return ypred
+    return local_weight_regression(training_data_x, mcol_b, tau)
 
 
 def plot_preds(

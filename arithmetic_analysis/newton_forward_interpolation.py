@@ -22,9 +22,7 @@ def ucal(u: float, p: int) -> float:
 
 def main() -> None:
     n = int(input("enter the numbers of values: "))
-    y: list[list[float]] = []
-    for i in range(n):
-        y.append([])
+    y: list[list[float]] = [[] for _ in range(n)]
     for i in range(n):
         for j in range(n):
             y[i].append(j)

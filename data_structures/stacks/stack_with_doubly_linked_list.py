@@ -59,13 +59,12 @@ class Stack(Generic[T]):
         """pop the top element off the stack"""
         if self.head is None:
             return None
-        else:
-            assert self.head is not None
-            temp = self.head.data
-            self.head = self.head.next
-            if self.head is not None:
-                self.head.prev = None
-            return temp
+        assert self.head is not None
+        temp = self.head.data
+        self.head = self.head.next
+        if self.head is not None:
+            self.head.prev = None
+        return temp
 
     def top(self) -> T | None:
         """return the top element of the stack"""

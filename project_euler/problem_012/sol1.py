@@ -26,7 +26,7 @@ divisors?
 def count_divisors(n):
     nDivisors = 1
     i = 2
-    while i * i <= n:
+    while i**2 <= n:
         multiplicity = 0
         while n % i == 0:
             n //= i

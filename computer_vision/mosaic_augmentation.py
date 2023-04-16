@@ -52,7 +52,7 @@ def main() -> None:
             obj = f"{anno[0]} {x_center} {y_center} {width} {height}"
             annos_list.append(obj)
         with open(f"{file_root}.txt", "w") as outfile:
-            outfile.write("\n".join(line for line in annos_list))
+            outfile.write("\n".join(annos_list))
 
 
 def get_dataset(label_dir: str, img_dir: str) -> tuple[list, list]:
@@ -162,7 +162,7 @@ def update_image_and_anno(
                 new_anno.append([bbox[0], xmin, ymin, xmax, ymax])
 
     # Remove bounding box small than scale of filter
-    if 0 < filter_scale:
+    if filter_scale > 0:
         new_anno = [
             anno
             for anno in new_anno

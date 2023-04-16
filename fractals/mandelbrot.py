@@ -60,10 +60,7 @@ def get_black_and_white_rgb(distance: float) -> tuple:
     >>> get_black_and_white_rgb(1)
     (0, 0, 0)
     """
-    if distance == 1:
-        return (0, 0, 0)
-    else:
-        return (255, 255, 255)
+    return (0, 0, 0) if distance == 1 else (255, 255, 255)
 
 
 def get_color_coded_rgb(distance: float) -> tuple:

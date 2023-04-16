@@ -51,8 +51,7 @@ def kadanes(arr: list) -> int:
         max_till_element += i
         if max_sum <= max_till_element:
             max_sum = max_till_element
-        if max_till_element < 0:
-            max_till_element = 0
+        max_till_element = max(max_till_element, 0)
     return max_sum
 
 

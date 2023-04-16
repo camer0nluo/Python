@@ -49,11 +49,11 @@ def _msd_radix_sort(list_of_ints: list[int], bit_position: int) -> list[int]:
     >>> _msd_radix_sort([10, 4, 12], 2)
     [4, 12, 10]
     """
-    if bit_position == 0 or len(list_of_ints) in [0, 1]:
+    if bit_position == 0 or len(list_of_ints) in {0, 1}:
         return list_of_ints
 
-    zeros = list()
-    ones = list()
+    zeros = []
+    ones = []
     # Split numbers based on bit at bit_position from the right
     for number in list_of_ints:
         if (number >> (bit_position - 1)) & 1:
@@ -147,7 +147,7 @@ def _msd_radix_sort_inplace(
 
         list_of_ints[i], list_of_ints[j] = list_of_ints[j], list_of_ints[i]
         j -= 1
-        if not j == i:
+        if j != i:
             i += 1
 
     _msd_radix_sort_inplace(list_of_ints, bit_position, begin_index, i)

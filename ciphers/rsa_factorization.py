@@ -37,17 +37,14 @@ def rsafactor(d: int, e: int, N: int) -> list[int]:
     while p == 0:
         g = random.randint(2, N - 1)
         t = k
-        while True:
-            if t % 2 == 0:
-                t = t // 2
-                x = (g**t) % N
-                y = math.gcd(x - 1, N)
-                if x > 1 and y > 1:
-                    p = y
-                    q = N // y
-                    break  # find the correct factors
-            else:
-                break  # t is not divisible by 2, break and choose another g
+        while t % 2 == 0:
+            t = t // 2
+            x = (g**t) % N
+            y = math.gcd(x - 1, N)
+            if x > 1 and y > 1:
+                p = y
+                q = N // y
+                break  # find the correct factors
     return sorted([p, q])
 
 

@@ -39,10 +39,9 @@ class LinkedListIterator:
     def __next__(self):
         if not self.current:
             raise StopIteration
-        else:
-            value = self.current.get_data()
-            self.current = self.current.get_next()
-            return value
+        value = self.current.get_data()
+        self.current = self.current.get_next()
+        return value
 
 
 class LinkedList:
@@ -70,14 +69,10 @@ class LinkedList:
         return LinkedListIterator(self.head)
 
     def get_head_data(self):
-        if self.head:
-            return self.head.get_data()
-        return None
+        return self.head.get_data() if self.head else None
 
     def get_tail_data(self):
-        if self.tail:
-            return self.tail.get_data()
-        return None
+        return self.tail.get_data() if self.tail else None
 
     def set_head(self, node: Node) -> None:
 

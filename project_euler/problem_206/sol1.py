@@ -61,12 +61,8 @@ def solution() -> int:
     """
     num = 138902663
 
-    while not is_square_form(num * num):
-        if num % 10 == 3:
-            num -= 6  # (3 - 6) % 10 = 7
-        else:
-            num -= 4  # (7 - 4) % 10 = 3
-
+    while not is_square_form(num**2):
+        num -= 6 if num % 10 == 3 else 4
     return num * 10
 
 

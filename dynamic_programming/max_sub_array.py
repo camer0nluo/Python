@@ -7,17 +7,16 @@ from __future__ import annotations
 def find_max_sub_array(A, low, high):
     if low == high:
         return low, high, A[low]
+    mid = (low + high) // 2
+    left_low, left_high, left_sum = find_max_sub_array(A, low, mid)
+    right_low, right_high, right_sum = find_max_sub_array(A, mid + 1, high)
+    cross_left, cross_right, cross_sum = find_max_cross_sum(A, low, mid, high)
+    if left_sum >= right_sum and left_sum >= cross_sum:
+        return left_low, left_high, left_sum
+    elif right_sum >= left_sum and right_sum >= cross_sum:
+        return right_low, right_high, right_sum
     else:
-        mid = (low + high) // 2
-        left_low, left_high, left_sum = find_max_sub_array(A, low, mid)
-        right_low, right_high, right_sum = find_max_sub_array(A, mid + 1, high)
-        cross_left, cross_right, cross_sum = find_max_cross_sum(A, low, mid, high)
-        if left_sum >= right_sum and left_sum >= cross_sum:
-            return left_low, left_high, left_sum
-        elif right_sum >= left_sum and right_sum >= cross_sum:
-            return right_low, right_high, right_sum
-        else:
-            return cross_left, cross_right, cross_sum
+        return cross_left, cross_right, cross_sum
 
 
 def find_max_cross_sum(A, low, mid, high):
@@ -62,8 +61,7 @@ def max_sub_array(nums: list[int]) -> int:
     current = 0
     for i in nums:
         current += i
-        if current < 0:
-            current = 0
+        current = max(current, 0)
         best = max(best, current)
     return best
 
@@ -80,7 +78,7 @@ if __name__ == "__main__":
     inputs = [10, 100, 1000, 10000, 50000, 100000, 200000, 300000, 400000, 500000]
     tim = []
     for i in inputs:
-        li = [randint(1, i) for j in range(i)]
+        li = [randint(1, i) for _ in range(i)]
         strt = time.time()
         (find_max_sub_array(li, 0, len(li) - 1))
         end = time.time()

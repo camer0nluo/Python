@@ -19,22 +19,23 @@ ValueError: Non-binary value was passed to the function
 
 
 def bin_to_octal(bin_string: str) -> str:
-    if not all(char in "01" for char in bin_string):
+    if any(char not in "01" for char in bin_string):
         raise ValueError("Non-binary value was passed to the function")
     if not bin_string:
         raise ValueError("Empty string was passed to the function")
     oct_string = ""
     while len(bin_string) % 3 != 0:
-        bin_string = "0" + bin_string
+        bin_string = f"0{bin_string}"
     bin_string_in_3_list = [
         bin_string[index : index + 3]
         for index in range(len(bin_string))
         if index % 3 == 0
     ]
     for bin_group in bin_string_in_3_list:
-        oct_val = 0
-        for index, val in enumerate(bin_group):
-            oct_val += int(2 ** (2 - index) * int(val))
+        oct_val = sum(
+            int(2 ** (2 - index) * int(val))
+            for index, val in enumerate(bin_group)
+        )
         oct_string += str(oct_val)
     return oct_string
 

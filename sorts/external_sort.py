@@ -77,10 +77,7 @@ class FilesArray:
                     self.empty.add(i)
                     self.files[i].close()
 
-        if len(self.empty) == self.num_buffers:
-            return False
-
-        return True
+        return len(self.empty) != self.num_buffers
 
     def unshift(self, index):
         value = self.buffers[index]
@@ -101,12 +98,7 @@ class FileMerger:
                 outfile.write(buffers.unshift(min_index))
 
     def get_file_handles(self, filenames, buffer_size):
-        files = {}
-
-        for i in range(len(filenames)):
-            files[i] = open(filenames[i], "r", buffer_size)
-
-        return files
+        return {i: open(filenames[i], "r", buffer_size) for i in range(len(filenames))}
 
 
 class ExternalSort:
@@ -120,7 +112,7 @@ class ExternalSort:
 
         merger = FileMerger(NWayMerge())
         buffer_size = self.block_size / (num_blocks + 1)
-        merger.merge(splitter.get_block_filenames(), filename + ".out", buffer_size)
+        merger.merge(splitter.get_block_filenames(), f"{filename}.out", buffer_size)
 
         splitter.cleanup()
 

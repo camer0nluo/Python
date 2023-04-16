@@ -58,9 +58,9 @@ def login_using_recaptcha(request):
     response = requests.post(url, data={"secret": secret_key, "response": client_key})
     # if the recaptcha api verified our keys
     if response.json().get("success", False):
-        # authenticate the user
-        user_in_database = authenticate(request, username=username, password=password)
-        if user_in_database:
+        if user_in_database := authenticate(
+            request, username=username, password=password
+        ):
             login(request, user_in_database)
             return redirect("/your-webpage")
     return render(request, "login.html")

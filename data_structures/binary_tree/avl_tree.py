@@ -76,15 +76,11 @@ class my_node:
 
 
 def get_height(node: my_node | None) -> int:
-    if node is None:
-        return 0
-    return node.get_height()
+    return 0 if node is None else node.get_height()
 
 
 def my_max(a: int, b: int) -> int:
-    if a > b:
-        return a
-    return b
+    return max(a, b)
 
 
 def right_rotation(node: my_node) -> my_node:
@@ -218,11 +214,10 @@ def del_node(root: my_node, data: Any) -> my_node | None:
             return root
         else:
             root.set_left(del_node(left_child, data))
-    else:  # root.get_data() < data
-        if right_child is None:
-            return root
-        else:
-            root.set_right(del_node(right_child, data))
+    elif right_child is None:
+        return root
+    else:
+        root.set_right(del_node(right_child, data))
 
     if get_height(right_child) - get_height(left_child) == 2:
         assert right_child is not None
@@ -282,11 +277,11 @@ class AVLtree:
         return get_height(self.root)
 
     def insert(self, data: Any) -> None:
-        print("insert:" + str(data))
+        print(f"insert:{str(data)}")
         self.root = insert_node(self.root, data)
 
     def del_node(self, data: Any) -> None:
-        print("delete:" + str(data))
+        print(f"delete:{str(data)}")
         if self.root is None:
             print("Tree is empty!")
             return
@@ -341,8 +336,8 @@ if __name__ == "__main__":
     random.shuffle(lst)
     for i in lst:
         t.insert(i)
-        print(str(t))
+        print(t)
     random.shuffle(lst)
     for i in lst:
         t.del_node(i)
-        print(str(t))
+        print(t)

@@ -17,11 +17,7 @@ def interpolation_search(sorted_collection, item):
     while left <= right:
         # avoid divided by 0 during interpolation
         if sorted_collection[left] == sorted_collection[right]:
-            if sorted_collection[left] == item:
-                return left
-            else:
-                return None
-
+            return left if sorted_collection[left] == item else None
         point = left + ((item - sorted_collection[left]) * (right - left)) // (
             sorted_collection[right] - sorted_collection[left]
         )
@@ -33,18 +29,16 @@ def interpolation_search(sorted_collection, item):
         current_item = sorted_collection[point]
         if current_item == item:
             return point
+        if point < left:
+            right = left
+            left = point
+        elif point > right:
+            left = right
+            right = point
+        elif item < current_item:
+            right = point - 1
         else:
-            if point < left:
-                right = left
-                left = point
-            elif point > right:
-                left = right
-                right = point
-            else:
-                if item < current_item:
-                    right = point - 1
-                else:
-                    left = point + 1
+            left = point + 1
     return None
 
 
@@ -61,11 +55,7 @@ def interpolation_search_by_recursion(sorted_collection, item, left, right):
 
     # avoid divided by 0 during interpolation
     if sorted_collection[left] == sorted_collection[right]:
-        if sorted_collection[left] == item:
-            return left
-        else:
-            return None
-
+        return left if sorted_collection[left] == item else None
     point = left + ((item - sorted_collection[left]) * (right - left)) // (
         sorted_collection[right] - sorted_collection[left]
     )

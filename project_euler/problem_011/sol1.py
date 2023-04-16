@@ -75,10 +75,8 @@ def solution():
     70600674
     """
     grid = []
-    with open(os.path.dirname(__file__) + "/grid.txt") as file:
-        for line in file:
-            grid.append(line.strip("\n").split(" "))
-
+    with open(f"{os.path.dirname(__file__)}/grid.txt") as file:
+        grid.extend(line.strip("\n").split(" ") for line in file)
     grid = [[int(i) for i in grid[j]] for j in range(len(grid))]
 
     return largest_product(grid)

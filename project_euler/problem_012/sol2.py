@@ -31,7 +31,7 @@ def triangle_number_generator():
 def count_divisors(n):
     divisors_count = 1
     i = 2
-    while i * i <= n:
+    while i**2 <= n:
         multiplicity = 0
         while n % i == 0:
             n //= i

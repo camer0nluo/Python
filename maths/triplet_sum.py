@@ -11,7 +11,7 @@ from timeit import repeat
 
 
 def make_dataset() -> tuple[list[int], int]:
-    arr = [randint(-1000, 1000) for i in range(10)]
+    arr = [randint(-1000, 1000) for _ in range(10)]
     r = randint(-5000, 5000)
     return (arr, r)
 
@@ -32,10 +32,14 @@ def triplet_sum1(arr: list[int], target: int) -> tuple[int, ...]:
     >>> triplet_sum1(arr, target)
     (0, 0, 0)
     """
-    for triplet in permutations(arr, 3):
-        if sum(triplet) == target:
-            return tuple(sorted(triplet))
-    return (0, 0, 0)
+    return next(
+        (
+            tuple(sorted(triplet))
+            for triplet in permutations(arr, 3)
+            if sum(triplet) == target
+        ),
+        (0, 0, 0),
+    )
 
 
 def triplet_sum2(arr: list[int], target: int) -> tuple[int, int, int]:

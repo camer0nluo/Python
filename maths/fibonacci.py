@@ -55,8 +55,7 @@ def fib_iterative(n: int) -> list[int]:
     if n == 0:
         return [0]
     fib = [0, 1]
-    for _ in range(n - 1):
-        fib.append(fib[-1] + fib[-2])
+    fib.extend(fib[-1] + fib[-2] for _ in range(n - 1))
     return fib
 
 
@@ -83,9 +82,7 @@ def fib_recursive(n: int) -> list[int]:
         """
         if i < 0:
             raise Exception("n is negative")
-        if i < 2:
-            return i
-        return fib_recursive_term(i - 1) + fib_recursive_term(i - 2)
+        return i if i < 2 else fib_recursive_term(i - 1) + fib_recursive_term(i - 2)
 
     if n < 0:
         raise Exception("n is negative")

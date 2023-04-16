@@ -42,10 +42,7 @@ def is_palindrome_recursive(s: str) -> bool:
     """
     if len(s) <= 1:
         return True
-    if s[0] == s[len(s) - 1]:
-        return is_palindrome_recursive(s[1:-1])
-    else:
-        return False
+    return is_palindrome_recursive(s[1:-1]) if s[0] == s[len(s) - 1] else False
 
 
 def is_palindrome_slice(s: str) -> bool:

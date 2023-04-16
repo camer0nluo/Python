@@ -34,7 +34,7 @@ def find_min(nums: list[int | float], left: int, right: int) -> int | float:
         ...
     IndexError: list index out of range
     """
-    if len(nums) == 0:
+    if not nums:
         raise ValueError("find_min() arg is an empty sequence")
     if (
         left >= len(nums)

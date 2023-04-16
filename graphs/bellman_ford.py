@@ -36,15 +36,16 @@ def bellman_ford(
     distance = [float("inf")] * vertex_count
     distance[src] = 0.0
 
-    for i in range(vertex_count - 1):
+    for _ in range(vertex_count - 1):
         for j in range(edge_count):
             u, v, w = (graph[j][k] for k in ["src", "dst", "weight"])
 
             if distance[u] != float("inf") and distance[u] + w < distance[v]:
                 distance[v] = distance[u] + w
 
-    negative_cycle_exists = check_negative_cycle(graph, distance, edge_count)
-    if negative_cycle_exists:
+    if negative_cycle_exists := check_negative_cycle(
+        graph, distance, edge_count
+    ):
         raise Exception("Negative cycle found")
 
     return distance
@@ -58,7 +59,7 @@ if __name__ == "__main__":
     V = int(input("Enter number of vertices: ").strip())
     E = int(input("Enter number of edges: ").strip())
 
-    graph: list[dict[str, int]] = [dict() for j in range(E)]
+    graph: list[dict[str, int]] = [{} for _ in range(E)]
 
     for i in range(E):
         print("Edge ", i + 1)

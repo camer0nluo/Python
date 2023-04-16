@@ -25,10 +25,7 @@ def is_prime(number: int) -> bool:
     True
     """
 
-    for i in range(2, int(number**0.5) + 1):
-        if number % i == 0:
-            return False
-    return True
+    return all(number % i != 0 for i in range(2, int(number**0.5) + 1))
 
 
 def solution(nth: int = 10001) -> int:
@@ -68,7 +65,7 @@ def solution(nth: int = 10001) -> int:
     """
 
     try:
-        nth = int(nth)
+        nth = nth
     except (TypeError, ValueError):
         raise TypeError("Parameter nth must be int or castable to int.") from None
     if nth <= 0:
@@ -78,10 +75,8 @@ def solution(nth: int = 10001) -> int:
     while len(primes) < nth:
         if is_prime(num):
             primes.append(num)
-            num += 1
-        else:
-            num += 1
-    return primes[len(primes) - 1]
+        num += 1
+    return primes[-1]
 
 
 if __name__ == "__main__":

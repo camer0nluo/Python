@@ -88,7 +88,7 @@ def area_under_line_estimator_check(
     estimated_value = area_under_curve_estimator(
         iterations, identity_function, min_value, max_value
     )
-    expected_value = (max_value * max_value - min_value * min_value) / 2
+    expected_value = (max_value**2 - min_value**2) / 2
 
     print("******************")
     print(f"Estimating area under y=x where x varies from {min_value} to {max_value}")
@@ -109,7 +109,7 @@ def pi_estimator_using_area_under_curve(iterations: int) -> None:
         >>> [function_to_integrate(x) for x in [-2.0, 0.0, 2.0]]
         [0.0, 2.0, 0.0]
         """
-        return sqrt(4.0 - x * x)
+        return sqrt(4.0 - x**2)
 
     estimated_value = area_under_curve_estimator(
         iterations, function_to_integrate, 0.0, 2.0

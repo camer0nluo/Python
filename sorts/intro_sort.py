@@ -134,7 +134,7 @@ def sort(array: list) -> list:
     >>> sort(['d', 'a', 'b', 'e', 'c'])
     ['a', 'b', 'c', 'd', 'e']
     """
-    if len(array) == 0:
+    if not array:
         return array
     max_depth = 2 * math.ceil(math.log2(len(array)))
     size_threshold = 16

@@ -16,8 +16,7 @@ def kthPermutation(k, n):
     """
     # Factorails from 1! to (n-1)!
     factorials = [1]
-    for i in range(2, n):
-        factorials.append(factorials[-1] * i)
+    factorials.extend(factorials[-1] * i for i in range(2, n))
     assert 0 <= k < factorials[-1] * n, "k out of bounds"
 
     permutation = []

@@ -51,15 +51,14 @@ def generate_neighbours(path):
     with open(path) as f:
         for line in f:
             if line.split()[0] not in dict_of_neighbours:
-                _list = list()
-                _list.append([line.split()[1], line.split()[2]])
+                _list = [[line.split()[1], line.split()[2]]]
                 dict_of_neighbours[line.split()[0]] = _list
             else:
                 dict_of_neighbours[line.split()[0]].append(
                     [line.split()[1], line.split()[2]]
                 )
             if line.split()[1] not in dict_of_neighbours:
-                _list = list()
+                _list = []
                 _list.append([line.split()[0], line.split()[2]])
                 dict_of_neighbours[line.split()[1]] = _list
             else:
@@ -206,7 +205,7 @@ def tabu_search(
     """
     count = 1
     solution = first_solution
-    tabu_list = list()
+    tabu_list = []
     best_cost = distance_of_first_solution
     best_solution_ever = solution
 
@@ -225,7 +224,7 @@ def tabu_search(
                     first_exchange_node = best_solution[i]
                     second_exchange_node = solution[i]
                     break
-                i = i + 1
+                i += 1
 
             if [first_exchange_node, second_exchange_node] not in tabu_list and [
                 second_exchange_node,
@@ -245,7 +244,7 @@ def tabu_search(
         if len(tabu_list) >= size:
             tabu_list.pop(0)
 
-        count = count + 1
+        count += 1
 
     return best_solution_ever, best_cost
 

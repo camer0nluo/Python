@@ -35,14 +35,14 @@ def mixed_keyword(key: str = "college", pt: str = "UNIVERSITY") -> str:
         if t not in temp:
             temp.append(t)
     # print(temp)
-    r = int(26 / 4)
+    r = 26 // 4
     # print(r)
     k = 0
     for _ in range(r):
         s = []
-        for j in range(len_temp):
+        for _ in range(len_temp):
             s.append(temp[k])
-            if not (k < 25):
+            if k >= 25:
                 break
             k += 1
         modalpha.append(s)
@@ -55,14 +55,11 @@ def mixed_keyword(key: str = "college", pt: str = "UNIVERSITY") -> str:
             if not (len(m) - 1 >= j):
                 break
             d[alpha[k]] = m[j]
-            if not k < 25:
+            if k >= 25:
                 break
             k += 1
     print(d)
-    cypher = ""
-    for i in pt:
-        cypher += d[i]
-    return cypher
+    return "".join(d[i] for i in pt)
 
 
 print(mixed_keyword("college", "UNIVERSITY"))

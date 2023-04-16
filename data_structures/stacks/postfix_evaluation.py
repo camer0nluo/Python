@@ -39,26 +39,21 @@ def Solve(Postfix):
         if x.isdigit():  # if x in digit
             Stack.append(x)  # append x to stack
             # output in tabular format
-            print(x.rjust(8), ("push(" + x + ")").ljust(12), ",".join(Stack), sep=" | ")
+            print(x.rjust(8), f"push({x})".ljust(12), ",".join(Stack), sep=" | ")
         else:
             B = Stack.pop()  # pop stack
             # output in tabular format
-            print("".rjust(8), ("pop(" + B + ")").ljust(12), ",".join(Stack), sep=" | ")
+            print("".rjust(8), f"pop({B})".ljust(12), ",".join(Stack), sep=" | ")
 
             A = Stack.pop()  # pop stack
             # output in tabular format
-            print("".rjust(8), ("pop(" + A + ")").ljust(12), ",".join(Stack), sep=" | ")
+            print("".rjust(8), f"pop({A})".ljust(12), ",".join(Stack), sep=" | ")
 
             Stack.append(
                 str(Opr[x](int(A), int(B)))
             )  # evaluate the 2 values popped from stack & push result to stack
             # output in tabular format
-            print(
-                x.rjust(8),
-                ("push(" + A + x + B + ")").ljust(12),
-                ",".join(Stack),
-                sep=" | ",
-            )
+            print(x.rjust(8), f"push({A}{x}{B})".ljust(12), ",".join(Stack), sep=" | ")
 
     return int(Stack[0])
 

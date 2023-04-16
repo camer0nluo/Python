@@ -37,15 +37,17 @@ def get_subreddit_data(
         raise requests.HTTPError
 
     data = response.json()
-    if not wanted_data:
-        return {id_: data["data"]["children"][id_] for id_ in range(limit)}
-
-    data_dict = {}
-    for id_ in range(limit):
-        data_dict[id_] = {
-            item: data["data"]["children"][id_]["data"][item] for item in wanted_data
+    return (
+        {
+            id_: {
+                item: data["data"]["children"][id_]["data"][item]
+                for item in wanted_data
+            }
+            for id_ in range(limit)
         }
-    return data_dict
+        if wanted_data
+        else {id_: data["data"]["children"][id_] for id_ in range(limit)}
+    )
 
 
 if __name__ == "__main__":

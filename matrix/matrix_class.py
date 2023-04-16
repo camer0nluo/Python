@@ -218,7 +218,7 @@ class Matrix:
 
     def inverse(self):
         determinant = self.determinant()
-        return None if not determinant else self.adjugate() * (1 / determinant)
+        return self.adjugate() * (1 / determinant) if determinant else None
 
     def __repr__(self):
         return str(self.rows)
@@ -254,7 +254,7 @@ class Matrix:
         if position is None:
             self.rows.append(row)
         else:
-            self.rows = self.rows[0:position] + [row] + self.rows[position:]
+            self.rows = self.rows[:position] + [row] + self.rows[position:]
 
     def add_column(self, column, position=None):
         type_error = TypeError(
@@ -273,7 +273,7 @@ class Matrix:
             self.rows = [self.rows[i] + [column[i]] for i in range(self.num_rows)]
         else:
             self.rows = [
-                self.rows[i][0:position] + [column[i]] + self.rows[i][position:]
+                self.rows[i][:position] + [column[i]] + self.rows[i][position:]
                 for i in range(self.num_rows)
             ]
 
@@ -343,7 +343,7 @@ class Matrix:
                 "Only invertable matrices can be raised to a negative power"
             )
         result = self
-        for i in range(other - 1):
+        for _ in range(other - 1):
             result *= self
         return result
 

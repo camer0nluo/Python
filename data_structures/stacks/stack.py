@@ -85,7 +85,7 @@ def test_stack() -> None:
     >>> test_stack()
     """
     stack: Stack[int] = Stack(10)
-    assert bool(stack) is False
+    assert not bool(stack)
     assert stack.is_empty() is True
     assert stack.is_full() is False
     assert str(stack) == "[]"

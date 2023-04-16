@@ -24,11 +24,11 @@ def pancake_sort(arr):
     cur = len(arr)
     while cur > 1:
         # Find the maximum number in arr
-        mi = arr.index(max(arr[0:cur]))
+        mi = arr.index(max(arr[:cur]))
         # Reverse from 0 to mi
-        arr = arr[mi::-1] + arr[mi + 1 : len(arr)]
+        arr = arr[mi::-1] + arr[mi + 1:]
         # Reverse whole list
-        arr = arr[cur - 1 :: -1] + arr[cur : len(arr)]
+        arr = arr[cur - 1 :: -1] + arr[cur:]
         cur -= 1
     return arr
 

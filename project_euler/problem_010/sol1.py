@@ -32,7 +32,7 @@ def is_prime(n: int) -> bool:
         return True
     elif n < 2 or not n % 2:
         return False
-    return not any(not n % i for i in range(3, int(sqrt(n) + 1), 2))
+    return all(n % i for i in range(3, int(sqrt(n) + 1), 2))
 
 
 def solution(n: int = 2000000) -> int:

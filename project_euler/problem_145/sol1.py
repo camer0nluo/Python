@@ -24,10 +24,7 @@ def odd_digits(num: int) -> bool:
     True
     """
     num_str = str(num)
-    for i in ["0", "2", "4", "6", "8"]:
-        if i in num_str:
-            return False
-    return True
+    return all(i not in num_str for i in ["0", "2", "4", "6", "8"])
 
 
 def solution(max_num: int = 1_000_000_000) -> int:

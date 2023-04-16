@@ -84,12 +84,9 @@ if __name__ == "__main__":
     drug_name = input("Enter drug name: ").strip()
     zip_code = input("Enter zip code: ").strip()
 
-    pharmacy_price_list: list | None = fetch_pharmacy_and_price_list(
+    if pharmacy_price_list := fetch_pharmacy_and_price_list(
         drug_name, zip_code
-    )
-
-    if pharmacy_price_list:
-
+    ):
         print(f"\nSearch results for {drug_name} at location {zip_code}:")
         for pharmacy_price in pharmacy_price_list:
 

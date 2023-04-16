@@ -43,7 +43,7 @@ def is_complete(board: list[list[int]]) -> bool:
     False
     """
 
-    return not any(elem == 0 for row in board for elem in row)
+    return all(elem != 0 for row in board for elem in row)
 
 
 def open_knight_tour_helper(
@@ -82,7 +82,7 @@ def open_knight_tour(n: int) -> list[list[int]]:
     ValueError: Open Kight Tour cannot be performed on a board of size 2
     """
 
-    board = [[0 for i in range(n)] for j in range(n)]
+    board = [[0 for _ in range(n)] for _ in range(n)]
 
     for i in range(n):
         for j in range(n):

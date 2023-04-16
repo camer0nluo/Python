@@ -36,8 +36,10 @@ def p_series(nth_term: int | float | str, power: int | float | str) -> list[str]
     nth_term = int(nth_term)
     power = int(power)
     series: list[str] = []
-    for temp in range(int(nth_term)):
-        series.append(f"1 / {pow(temp + 1, int(power))}" if series else "1")
+    series.extend(
+        f"1 / {pow(temp + 1, power)}" if series else "1"
+        for temp in range(nth_term)
+    )
     return series
 
 

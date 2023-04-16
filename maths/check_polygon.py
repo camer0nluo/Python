@@ -33,8 +33,7 @@ def check_polygon(nums: list[float]) -> bool:
         raise ValueError("Monogons and Digons are not polygons in the Euclidean space")
     if any(i <= 0 for i in nums):
         raise ValueError("All values must be greater than 0")
-    copy_nums = nums.copy()
-    copy_nums.sort()
+    copy_nums = sorted(nums)
     return copy_nums[-1] < sum(copy_nums[:-1])
 
 

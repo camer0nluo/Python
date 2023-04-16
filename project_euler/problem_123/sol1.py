@@ -64,8 +64,7 @@ def sieve() -> Generator[int, None, None]:
     factor_map: dict[int, int] = {}
     prime = 2
     while True:
-        factor = factor_map.pop(prime, None)
-        if factor:
+        if factor := factor_map.pop(prime, None):
             x = factor + prime
             while x in factor_map:
                 x += factor

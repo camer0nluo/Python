@@ -14,10 +14,10 @@ class DoubleHash(HashTable):
     def __hash_function_2(self, value, data):
 
         next_prime_gt = (
-            next_prime(value % self.size_table)
-            if not check_prime(value % self.size_table)
-            else value % self.size_table
-        )  # gt = bigger than
+            value % self.size_table
+            if check_prime(value % self.size_table)
+            else next_prime(value % self.size_table)
+        )
         return next_prime_gt - (data % next_prime_gt)
 
     def __hash_double_function(self, key, data, increment):

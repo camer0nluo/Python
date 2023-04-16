@@ -134,7 +134,7 @@ def _plugboard(pbstring: str) -> dict[str, str]:
         raise TypeError(f"Plugboard setting isn't type string ({type(pbstring)})")
     elif len(pbstring) % 2 != 0:
         raise Exception(f"Odd number of symbols ({len(pbstring)})")
-    elif pbstring == "":
+    elif not pbstring:
         return {}
 
     pbstring.replace(" ", "")

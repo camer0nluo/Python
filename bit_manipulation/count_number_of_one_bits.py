@@ -24,7 +24,7 @@ def get_set_bits_count(number: int) -> int:
     while number:
         if number % 2 == 1:
             result += 1
-        number = number >> 1
+        number >>= 1
     return result
 
 

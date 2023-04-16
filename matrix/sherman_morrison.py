@@ -18,7 +18,7 @@ class Matrix:
         """
 
         self.row, self.column = row, column
-        self.array = [[default_value for c in range(column)] for r in range(row)]
+        self.array = [[default_value for _ in range(column)] for _ in range(row)]
 
     def __str__(self):
         """
@@ -256,7 +256,7 @@ if __name__ == "__main__":
         v[0, 0], v[1, 0], v[2, 0] = 4, -2, 5
         print(f"u is {u}")
         print(f"v is {v}")
-        print("uv^T is %s" % (u * v.transpose()))
+        print(f"uv^T is {u * v.transpose()}")
         # Sherman Morrison
         print(f"(a + uv^T)^(-1) is {ainv.ShermanMorrison(u, v)}")
 

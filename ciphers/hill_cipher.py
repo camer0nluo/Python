@@ -161,12 +161,14 @@ class HillCipher:
 
         if det < 0:
             det = det % len(self.key_string)
-        det_inv = None
-        for i in range(len(self.key_string)):
-            if (det * i) % len(self.key_string) == 1:
-                det_inv = i
-                break
-
+        det_inv = next(
+            (
+                i
+                for i in range(len(self.key_string))
+                if (det * i) % len(self.key_string) == 1
+            ),
+            None,
+        )
         inv_key = (
             det_inv
             * numpy.linalg.det(self.encrypt_key)

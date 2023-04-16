@@ -60,7 +60,7 @@ if __name__ == "__main__":
     v = int(input("Enter number of vertices: "))
     e = int(input("Enter number of edges: "))
 
-    graph = [[float("inf") for i in range(v)] for j in range(v)]
+    graph = [[float("inf") for _ in range(v)] for _ in range(v)]
 
     for i in range(v):
         graph[i][i] = 0.0

@@ -46,10 +46,7 @@ def softmax(vector):
     # Add up the all the exponentials
     sumOfExponents = np.sum(exponentVector)
 
-    # Divide every exponent by the sum of all exponents
-    softmax_vector = exponentVector / sumOfExponents
-
-    return softmax_vector
+    return exponentVector / sumOfExponents
 
 
 if __name__ == "__main__":

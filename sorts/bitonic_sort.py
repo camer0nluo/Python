@@ -54,7 +54,7 @@ def bitonic_merge(array: list[int], low: int, length: int, direction: int) -> No
     [42, 12, 1, -21]
     """
     if length > 1:
-        middle = int(length / 2)
+        middle = length // 2
         for i in range(low, low + middle):
             comp_and_swap(array, i, i + middle, direction)
         bitonic_merge(array, low, middle, direction)
@@ -77,7 +77,7 @@ def bitonic_sort(array: list[int], low: int, length: int, direction: int) -> Non
     [145, 92, 34, 12, 0, -23, -121, -167]
     """
     if length > 1:
-        middle = int(length / 2)
+        middle = length // 2
         bitonic_sort(array, low, middle, 1)
         bitonic_sort(array, low + middle, middle, 0)
         bitonic_merge(array, low, length, direction)

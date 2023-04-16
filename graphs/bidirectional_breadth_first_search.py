@@ -71,9 +71,7 @@ class BreadthFirstSearch:
             for node in successors:
                 self.node_queue.append(node)
 
-        if not self.reached:
-            return [self.start.pos]
-        return None
+        return None if self.reached else [self.start.pos]
 
     def get_successors(self, parent: Node) -> list[Node]:
         """
@@ -149,17 +147,14 @@ class BidirectionalBreadthFirstSearch:
                 for node in successors[bfs]:
                     bfs.node_queue.append(node)
 
-        if not self.reached:
-            return [self.fwd_bfs.start.pos]
-        return None
+        return None if self.reached else [self.fwd_bfs.start.pos]
 
     def retrace_bidirectional_path(self, fwd_node: Node, bwd_node: Node) -> Path:
         fwd_path = self.fwd_bfs.retrace_path(fwd_node)
         bwd_path = self.bwd_bfs.retrace_path(bwd_node)
         bwd_path.pop()
         bwd_path.reverse()
-        path = fwd_path + bwd_path
-        return path
+        return fwd_path + bwd_path
 
 
 if __name__ == "__main__":

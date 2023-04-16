@@ -17,7 +17,7 @@ def password_generator(length=8):
     0
     """
     chars = ascii_letters + digits + punctuation
-    return "".join(choice(chars) for x in range(length))
+    return "".join(choice(chars) for _ in range(length))
 
 
 # ALTERNATIVE METHODS
@@ -46,7 +46,7 @@ def alternative_password_generator(ctbi, i):
 
 
 def random(ctbi, i):
-    return "".join(choice(ctbi) for x in range(i))
+    return "".join(choice(ctbi) for _ in range(i))
 
 
 def random_number(ctbi, i):

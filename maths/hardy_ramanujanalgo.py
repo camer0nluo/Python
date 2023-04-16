@@ -24,7 +24,7 @@ def exactPrimeFactorCount(n):
             count += 1
             while n % i == 0:
                 n = int(n / i)
-        i = i + 2
+        i += 2
 
     # this condition checks the prime
     # number n is greater than 2

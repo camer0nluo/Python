@@ -308,28 +308,26 @@ def example_3() -> BodySystem:
     """
 
     bodies = []
-    for i in range(10):
+    for _ in range(10):
         velocity_x = random.uniform(-0.5, 0.5)
         velocity_y = random.uniform(-0.5, 0.5)
 
-        # Bodies are created pairwise with opposite velocities so that the
-        # total impulse remains zero
-        bodies.append(
-            Body(
-                random.uniform(-0.5, 0.5),
-                random.uniform(-0.5, 0.5),
-                velocity_x,
-                velocity_y,
-                size=0.05,
-            )
-        )
-        bodies.append(
-            Body(
-                random.uniform(-0.5, 0.5),
-                random.uniform(-0.5, 0.5),
-                -velocity_x,
-                -velocity_y,
-                size=0.05,
+        bodies.extend(
+            (
+                Body(
+                    random.uniform(-0.5, 0.5),
+                    random.uniform(-0.5, 0.5),
+                    velocity_x,
+                    velocity_y,
+                    size=0.05,
+                ),
+                Body(
+                    random.uniform(-0.5, 0.5),
+                    random.uniform(-0.5, 0.5),
+                    -velocity_x,
+                    -velocity_y,
+                    size=0.05,
+                ),
             )
         )
     return BodySystem(bodies, 0.01, 10, 0.1)
